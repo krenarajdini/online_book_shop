@@ -33,9 +33,6 @@ if($email != false && $password != false){
     nav{
         padding-left: 100px!important;
         padding-right: 100px!important;
-
-
-        
         background: #6665ee;
         font-family: 'Poppins', sans-serif;
     } 
