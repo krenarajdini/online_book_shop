@@ -55,7 +55,7 @@
                     <td ><input  id="area-number" name="txtcitycode" type="text" class="form-control" 
                       placeholder="Area" value="<?php echo $intccode;?>" maxLength="2"></td>
                     <td><input id="phone-number" name="txtphone" type="text" class="form-control"
-                     placeholder="Phone " required value="<?php echo $intphone;?>" maxLength="10" ></td>
+                     placeholder="Phone " required value="<?php echo $intphone;?>" maxLength="7" ></td>
                     <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Tel</strong></label></div><br>
                     <p id="number-error"></p>
                     

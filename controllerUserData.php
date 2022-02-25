@@ -88,16 +88,8 @@ if(isset($_POST['signup'])){
         if($data_check){
             $subject = "Email Verification Code";
             $message = "Your verification code is $code";
-            // $sender = "krenarajdini912@gmail.com";
-            $headers = 'From:krenarajdini912@gmail.com' . "\r\n" .
-                'Reply-To:webmaster@example.com' . "\r\n" .
-                'X-Mailer:PHP/' . phpversion();
-
-            echo('Hi from buraydah');
-
-
-
-            if(mail($email, $subject, $message, $headers)){
+            $sender = "krenarajdini912@gmail.com";
+            if(mail($email, $subject, $message, $sender)){
                 $info = "We've sent a verification code to your email - $email";
                 $_SESSION['info'] = $info;
                 $_SESSION['email'] = $email;
