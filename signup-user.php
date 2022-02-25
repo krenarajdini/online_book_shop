@@ -80,24 +80,29 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label>
                     </div>
-                        <input class="form-control" type="email" name="email" 
+                        <input id="email" class="form-control" type="email" name="email" 
                         placeholder="email@example.com" required value="<?php echo $email ?> "minlength="8">
                     </div>
+                    <h1 id="email-error"></h1>
 
                     <div class="form-row">
                         <div class="col">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Password</strong></label>
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        <input class="form-control" id="pswd" type="password" name="password"
+                         title="Minimum eight characters, at least one letter and one number:" placeholder="Password"  required>
+                        <span id = "message" style="color:red"> </span> <br><br>  
                         </div>
                         <div class="col">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Confirm Password</strong></label>
-                        <input class="form-control" type="password" name="cpassword" placeholder="Confirm password" required>
+                        <input class="form-control" id="confirm-pswd" type="password" name="cpassword" placeholder="Confirm password" required>
+                           
                         </div>
+                        <h1 id="pass-error-message"></h1> 
                     </div><br>
                     
                     <div class="form-group">
-                        <button id="signup-btn" class="form-control button" type="submit">Signup</button>
-                        <button class="form-control resetbtn" type="reset">Reset</button>
+                        <button class="form-control button"  type="submit" name="signup" value="Signup">Signup</button>
+                        <button class="form-control resetbtn" type="reset" name="reset" value="Reset">Reset</button>
                     </div>
                     </div>
                 </form>
