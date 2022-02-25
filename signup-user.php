@@ -102,7 +102,7 @@
                     
                     <div class="form-group">
                         <button class="form-control button"  type="submit" name="signup" value="Signup">Signup</button>
-                        <button class="form-control resetbtn" type="reset" name="reset" value="Reset">Reset</button>
+                        <button class="form-control resetbtn" type="reset" name="reset" >Reset</button>
                     </div>
                     </div>
                 </form>
