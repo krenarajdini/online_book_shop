@@ -1,25 +1,23 @@
+
 <?php
-// including the database connection file
+session_start();
 include_once("connection.php");
+$username = $_SESSION['name'];
+$result = mysqli_query($con, "SELECT * FROM user WHERE name = '$username'");
 
-?>
-<?php
-//getting id from url
-$u_id = $_GET['u_id'];
-
-//selecting data associated with this particular id
-$result = mysqli_query($con, "SELECT * FROM user WHERE u_id=$u_id");
-
-while($res = mysqli_fetch_array($result))
-{
+if($res = mysqli_fetch_array($result)){
+	$u_id = $res['u_id'];
 	$name = $res['name'];
 	$phone_number = $res['phone_number'];
 	$gender = $res['gender'];
 	$shipment_address = $res['shipment_address'];
 	$email = $res['email'];
-	$Password = $res['password'];
-
+	$password = $res['password'];
+	echo $u_id;
+	echo $name;
+	echo $phone_number;
 }
+
 ?>
 <html>
 <head>	
@@ -55,10 +53,10 @@ while($res = mysqli_fetch_array($result))
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input type="text" name="password" value="<?php echo $Password;?>"></td>
+				<td><input type="text" name="password" value="<?php echo $password;?>"></td>
 			</tr>
 			<tr>
-				<td><input type="hidden" name="u_id" value=<?php echo $_GET['u_id'];?>></td>
+				<td><input type="hidden" name="u_id" value= "<?php echo $u_id;?>"></td>
 				<td><input type="submit" name="update" value="Update"></td>
 			</tr>
 		</table>

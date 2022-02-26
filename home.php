@@ -21,6 +21,7 @@ if($email != false && $password != false){
     header('Location: login-user.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +70,7 @@ if($email != false && $password != false){
     <a class="navbar-brand" href="#">Online Book Shop</a>
     <h1 class="username"><strong>Welcome <?php echo $fetch_info['name'] ?></strong></h1>
     <div class="form-group">
-    <button type="button" class="btn btn-light"><a href="profile.php">Account</a></button>
+    <button type="button" class="btn btn-light"><a href="edit.php">Account</a></button>
     <button type="button" class="btn btn-light"><a href="login-user.php">Logout</a></button>
     </nav>
     </div>
