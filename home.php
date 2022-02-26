@@ -70,7 +70,6 @@ if($email != false && $password != false){
     <h1 class="username"><strong>Welcome <?php echo $fetch_info['name'] ?></strong></h1>
     <div class="form-group">
     <button type="button" class="btn btn-light"><a href="profile.php">Account</a></button>
-    
     <button type="button" class="btn btn-light"><a href="login-user.php">Logout</a></button>
     </nav>
     </div>

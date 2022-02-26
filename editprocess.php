@@ -19,7 +19,7 @@ echo '<font color="red">Email field is empty.</font><br>';
 }		
 } else {	
 $result = mysqli_query($con, "UPDATE user SET name='$name',gender='$gender',email='$email' WHERE u_id=$u_id");
-header("Location: index.php");
+header("Location: profile.php");
 }
 }
 ?>

@@ -34,7 +34,7 @@ while($res = mysqli_fetch_array($result))
 				<td><input type="text" name="name" value="<?php echo $name;?>"></td>
 			</tr>
 			<tr>
-				<td>Age</td>
+				<td>Gender</td>
 				<td><input type="text" name="gender" value="<?php echo $gender;?>"></td>
 			</tr>
 		<tr> 
