@@ -5,7 +5,7 @@ let isUsernameValid = false;
 usernameElement.onkeyup = function () {
   const username = usernameElement.value;
 
-  if (!username.match(/^[a-zA-Z]+$/)) {
+  if (!username.match(/^[ a-zA-Z\s]*$/g)) {
     usernameElement.classList.add("error-element");
     isUsernameValid = false;
     usernameErrorElement.innerText = "Username must be alpha";

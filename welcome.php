@@ -1,10 +1,14 @@
 <?php
 
 session_start();
-
 include 'connection.php';   
+$email = "";
+$name = "";
+$errors = array();
+
 
 if (isset($_POST["submit"])) {
+
     $name = mysqli_real_escape_string($con, $_POST["name"]);
     $password = mysqli_real_escape_string($con, md5($_POST["password"]));
     $cpassword = mysqli_real_escape_string($con, md5($_POST["cpassword"]));
