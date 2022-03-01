@@ -1,5 +1,7 @@
 <?php
+session_start();
 include_once("connection.php");
+$username = $_SESSION['name'];
 if(isset($_POST['update']))
 {	
 
@@ -15,23 +17,23 @@ if(empty($name)) {
 echo '<font color="red">Name field is empty.</font><br>';
 }
 if(empty($phone_number)) {
-echo '<font color="red">Age field is empty.</font><br>';
+echo '<font color="red">Phone number field is empty.</font><br>';
 }
 if(empty($gender)) {
-echo '<font color="red">Age field is empty.</font><br>';
+echo '<font color="red">gender field is empty.</font><br>';
 }
 if(empty($shipment_address)) {
- echo '<font color="red">Age field is empty.</font><br>';
+ echo '<font color="red">Shipment address field is empty.</font><br>';
 }
 if(empty($email)) {
-echo '<font color="red">Age field is empty.</font><br>';
+echo '<font color="red">Email field is empty.</font><br>';
 }
 if(empty($password)) {
-echo '<font color="red">Email field is empty.</font><br>';
+echo '<font color="red">Password field is empty.</font><br>';
 }		
 } else {	
 $result = mysqli_query($con, "UPDATE user SET name='$name',phone_number='$phone_number',gender='$gender',shipment_address='$shipment_address',email='$email',password='$password' WHERE u_id=$u_id");
-header("Location: profile.php");
+header("Location: edit.php");
 }
 }
 ?>

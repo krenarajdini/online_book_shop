@@ -1,22 +1,29 @@
-
 <?php
 session_start();
 include_once("connection.php");
 $username = $_SESSION['name'];
-$result = mysqli_query($con, "SELECT * FROM user WHERE name = '$username'");
+$username = mysqli_query($con, "SELECT * FROM user WHERE u_id  ");
 
-if($res = mysqli_fetch_array($result)){
+// if($res = mysqli_fetch_array($username)){
+// 	echo "<tr>";
+// 	echo "<td bgcolor=''>".$res['name']."</td>";
+// 		echo "<td>".$res['phone_number']."</td>";
+// 		echo "<td>".$res['gender']."</td>";
+// 		echo "<td>".$res['shipment_address']."</td>";
+// 		echo "<td>".$res['email']."</td>";
+// 		echo "<td>".$res['password']."</td>";	
+// }
+
+
+if($res = mysqli_fetch_array($username)){
 	$u_id = $res['u_id'];
 	$name = $res['name'];
 	$phone_number = $res['phone_number'];
 	$gender = $res['gender'];
 	$shipment_address = $res['shipment_address'];
 	$email = $res['email'];
-	$password = $res['password'];
-	echo $u_id;
-	echo $name;
-	echo $phone_number;
-}
+	$password = $res['password'];}
+
 
 ?>
 <html>
@@ -26,7 +33,7 @@ if($res = mysqli_fetch_array($result)){
 
 <body>
     
-<a href="profile.php">Home</a>
+<a href="home.php">Home</a>
 	<br><br>
 	
 	<form name="form1" method="post" action="editprocess.php">
