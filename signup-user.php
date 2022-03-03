@@ -48,17 +48,17 @@
                     </div>
                     <p id="username-error"></p>
 
-                      
+                    <div class="input-group input-group-sm mb-3">
                     <div class="input-group">
-                    <td><input id="country-number" name="txtisdcode" type="text" class="form-control" 
-                    placeholder="Country" value="<?php echo $intisd; ?>" maxLength="3"></td>
-                    <td ><input  id="area-number" name="txtcitycode" type="text" class="form-control" 
-                      placeholder="Area" value="<?php echo $intccode;?>" maxLength="2"></td>
-                    <td><input id="phone-number" name="txtphone" type="text" class="form-control"
-                     placeholder="Phone " required value="<?php echo $intphone;?>" maxLength="7" ></td>
-                    <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Tel</strong></label></div><br>
+                    <input id="country-number" name="txtisdcode" type="text" class="form-control" 
+                    placeholder="Country" value="<?php echo $intisd; ?>" maxLength="3">
+                    <input  id="area-number" name="txtcitycode" type="text" class="form-control" 
+                      placeholder="Area" value="<?php echo $intccode;?>" maxLength="2">
+                    <input id="phone-number" name="txtphone" type="text" class="form-control"
+                     placeholder="Phone " required value="<?php echo $intphone;?>" maxLength="7" >
+                    <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Tel</strong></label></div></div>
                     <p id="number-error"></p>
-                    
+
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01"><strong>Gender</strong></label>
@@ -69,37 +69,35 @@
                         <option value="Female">Female</option>
                     </select>
                     </div>
-                    <div class="input-group">
-                    <div class="input-group-prepend">
+
+                    
+                    <div class="input-group input-group-sm mb-3">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Shipment Address</strong></label>
+                        <textarea class="textarea" name="shipment_address" placeholder=" input your text here.."  ></textarea>
                     </div>
-                    <textarea class="textarea" name="shipment_address" placeholder=" input your text here.."  ></textarea>
-                    </div><br>
 
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label>
-                    </div>
+                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label></div>
                         <input id="email" class="form-control" type="email" name="email" 
                         placeholder="email@example.com" required value="<?php echo $email ?> "minlength="8">
                     </div>
-                    <h1 id="email-error"></h1>
-
+                    <p id="email-error"></p>
+                    
+                    <div class="input-group input-group-sm mb-3">
                     <div class="form-row">
                         <div class="col">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Password</strong></label>
                         <input class="form-control" id="pswd" type="password" name="password"
                          title="Minimum eight characters, at least one letter and one number:" placeholder="Password"  required>
-                        <span id = "message" style="color:red"> </span> <br><br>  
                         </div>
                         <div class="col">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Confirm Password</strong></label>
                         <input class="form-control" id="confirm-pswd" type="password" name="cpassword" placeholder="Confirm password" required>
-                           
                         </div>
-                        <h1 id="pass-error-message"></h1> 
-                    </div><br>
-                    
+                        </div></div>
+                        <p id="pass-error-message"></p> 
+                        
                     <div class="form-group">
                         <button class="form-control button"  type="submit" name="signup" value="Signup">Signup</button>
                         <button class="form-control resetbtn" type="reset" name="reset" >Reset</button>
