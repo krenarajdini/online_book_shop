@@ -29,16 +29,19 @@
                     ?>
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label>
+                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label></div>
+                        <input id="email" class="form-control" type="email" name="email" 
+                        placeholder="email@example.com" required value="<?php echo $email ?> "minlength="8">
                     </div>
-                        <input class="form-control" type="email" name="email" placeholder="email@example.com" required value="<?php echo $email ?>">
-                    </div>
+                    <p id="email-error"></p>
+
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Password</strong></label>
                     </div>
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        <input class="form-control" id="pswd" type="password" name="password" placeholder="Password" required>
                     </div>
+                    <p id="pass-error-message"></p> 
                     <!-- <div><input type="checkbox" name="rememberme" value="1" />&nbsp;Remember Me</div> -->
                     <div class="table">
                         <input class="form-control button" type="submit" name="login" value="Login">
@@ -50,6 +53,6 @@
             </div>
         </div>
     </div>
-    
+    <script src="js/login-user.js"></script>
 </body>
 </html>
