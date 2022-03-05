@@ -1,37 +1,33 @@
 <?php
-session_start();
-include_once("connection.php");
-$username = $_SESSION['name'];
-$username = mysqli_query($con, "SELECT * FROM user WHERE u_id  ");
-
-// if($res = mysqli_fetch_array($username)){
-// 	echo "<tr>";
-// 	echo "<td bgcolor=''>".$res['name']."</td>";
-// 		echo "<td>".$res['phone_number']."</td>";
-// 		echo "<td>".$res['gender']."</td>";
-// 		echo "<td>".$res['shipment_address']."</td>";
-// 		echo "<td>".$res['email']."</td>";
-// 		echo "<td>".$res['password']."</td>";	
-// }
+	session_start();
+	include_once("connection.php");
+	$email = $_SESSION['email'];
+	$user = mysqli_query($con, "SELECT * FROM user WHERE user.email = '$email'");
 
 
-if($res = mysqli_fetch_array($username)){
-	$u_id = $res['u_id'];
-	$name = $res['name'];
-	$phone_number = $res['phone_number'];
-	$gender = $res['gender'];
-	$shipment_address = $res['shipment_address'];
-	$email = $res['email'];
-	$password = $res['password'];}
-
+	if($res = mysqli_fetch_array($user)){
+		$u_id = $res['u_id'];
+		$name = $res['name'];
+		$phone_number = $res['phone_number'];
+		$gender = $res['gender'];
+		$shipment_address = $res['shipment_address'];
+		$email = $res['email'];
+		$password = $res['password'];
+	}
 
 ?>
 <html>
 <head>	
 	<title>Edit Data</title>
+	<link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 
 <body>
+	<?php
+	include_once("navbar.php");
+	?>
     
 <a href="home.php">Home</a>
 	<br><br>

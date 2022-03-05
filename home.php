@@ -7,6 +7,7 @@ if($email != false && $password != false){
     $run_Sql = mysqli_query($con, $sql);
     if($run_Sql){
         $fetch_info = mysqli_fetch_assoc($run_Sql);
+        $name = $fetch_info['name'] ;
         $status = $fetch_info['status'];
         $code = $fetch_info['code'];
         if($status == "verified"){
@@ -29,51 +30,11 @@ if($email != false && $password != false){
     <title><?php echo $fetch_info['name'] ?> | Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/home.css">
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-    nav{
-        padding-left: 100px!important;
-        padding-right: 100px!important;
-
-
-
-        
-        background: #6665ee;
-        font-family: 'Poppins', sans-serif;
-    } 
-    nav a.navbar-brand{
-        color: #fff;
-        font-size: 30px!important;
-        font-weight: 500;
-    }
-    button a{
-        color: #6665ee;
-        font-weight: 500;
-    }
-    button a:hover{
-        text-decoration: none;
-    }
-    h1{
-        position: absolute;
-        top: 50%;
-        left: 75%;
-        width: 100%;
-        text-align: center;
-        transform: translate(-50%, -50%);
-        font-size: 15px;
-        font-weight: 600;
-    }
-    </style>
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
-    <nav class="navbar">
-    <a class="navbar-brand" href="#">Online Book Shop</a>
-    <h1 class="username"><strong>Welcome <?php echo $fetch_info['name'] ?></strong></h1>
-    <div class="form-group">
-    <button type="button" class="btn btn-light"><a href="edit.php">Account</a></button>
-    <button type="button" class="btn btn-light"><a href="login-user.php">Logout</a></button>
-    </nav>
-    </div>
-    
+    <?php
+        include_once("navbar.php");
+    ?>
 </body>
 </html>

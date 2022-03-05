@@ -39,7 +39,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Password</strong></label>
                     </div>
-                        <input class="form-control" id="pswd" type="password" name="password" placeholder="Password" required>
+                        <input class="form-control" id="password1" type="password" name="password" placeholder="Password" required>
                     </div>
                     <p id="pass-error-message"></p> 
                     <!-- <div><input type="checkbox" name="rememberme" value="1" />&nbsp;Remember Me</div> -->
