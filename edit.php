@@ -21,48 +21,49 @@
 	<title>Edit Data</title>
 	<link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+	<link rel="stylesheet" href="css/edit.css">
 </head>
 
 <body>
 	<?php
 	include_once("navbar.php");
 	?>
-    
-<a href="home.php">Home</a>
-	<br><br>
 	
-	<form name="form1" method="post" action="editprocess.php">
-		<table border="0">
-			<tr>
-				<td>Name</td>
-				<td><input type="text" name="name" value="<?php echo $name;?>"></td>
-			</tr>
-			<tr>
-				<td>Phone number</td>
-				<td><input type="text" name="phone_number" value="<?php echo $phone_number;?>"></td>
-			</tr>
-			<tr>
-				<td>Gender</td>
-				<td><input type="text" name="gender" value="<?php echo $gender;?>"></td>
-			</tr>
-			<tr>
-				<td>Shipment address</td>
-				<td><input type="text" name="shipment_address" value="<?php echo $shipment_address;?>"></td>
-			</tr>
-			<tr> 
-				<td>Email</td>
-				<td><input type="text" name="email" value="<?php echo $email;?>"></td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td><input type="text" name="password" value="<?php echo $password;?>"></td>
-			</tr>
-			<tr>
-				<td><input type="hidden" name="u_id" value= "<?php echo $u_id;?>"></td>
-				<td><input type="submit" name="update" value="Update"></td>
-			</tr>
-		</table>
-	</form>
+	
+	<div class="form-container">
+		<div class="form-infos">
+			<div class="form-title">
+				<p>Name</p>
+				<p>Phone number</p>
+				<p>Gender</p>
+				<p>Shipment address</p>
+				<p>Email</p>
+				<p>Password</p>
+				<p>Confirm Password</p>
+			</div>
+			
+			<form name="form1" method="post" action="editprocess.php" >
+				<div class="form-inputs">
+					<input type="text" name="name" value="<?php echo $name;?>">
+					<input type="text" name="phone_number" value="<?php echo $phone_number;?>">
+					<select name="gender" id="inputGroupSelect01" >
+						<option value="0" selected>Choose...</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+					</select>
+					<input type="text" name="shipment_address" value="<?php echo $shipment_address;?>">
+					<input type="text" name="email" value="<?php echo $email;?>">
+					<input type="password" name="password">
+					<input type="password" name="confpassword">
+
+					<input type="hidden" name="u_id" value= "<?php echo $u_id;?>">
+					
+				</div>
+				
+			</form>
+		</div>
+		<input type="submit" name="update" class="btn btn-light form-btn" value="Update">
+	</div>
+	
 </body>
 </html>
