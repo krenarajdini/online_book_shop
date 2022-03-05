@@ -42,9 +42,9 @@
 				<p>Confirm Password</p>
 			</div>
 			
-			<form name="form1" method="post" action="editprocess.php" >
+			<form name="update" method="post" action="editprocess.php" >
 				<div class="form-inputs">
-					<input type="text" name="name" id="disabled" disabled="disabled"  value="<?php echo $name;?>">
+					<input type="text" name="name"    value="<?php echo $name;?>">
 					<input type="text" name="phone_number" value="<?php echo $phone_number;?>">
 					<select name="gender" id="inputGroupSelect01" >
 						<option value="0" selected>Choose...</option>
@@ -52,7 +52,7 @@
 						<option value="Female">Female</option>
 					</select>
 					<input type="text" name="shipment_address" value="<?php echo $shipment_address;?>">
-					<input type="text" name="email" id="disabled" disabled="disabled"  value="<?php echo $email;?>">
+					<input type="text" name="email"  value="<?php echo $email;?>">
 					<input type="password" name="password">
 					<input type="password" name="confpassword">
 
@@ -60,9 +60,10 @@
 					
 				</div>
 				
-			</form>
+			
 		</div>
 		<input type="submit" name="update" class="btn btn-light form-btn" value="Update">
+		</form>
 	</div>
 	
 </body>

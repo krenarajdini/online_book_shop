@@ -2,7 +2,9 @@
 session_start();
 include_once("connection.php");
 $email = $_SESSION['email'];
+
 if(isset($_POST['update'])){	
+  
 
     //Clean input
     $u_id = mysqli_real_escape_string($con, $_POST['u_id']);
