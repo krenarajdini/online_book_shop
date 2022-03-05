@@ -38,7 +38,13 @@ select {
   width: 100%;
 }
 
-.form-btn {
+.form-btn:hover {
   color: #6665ee;
   font-weight: bold;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0), 0 17px 50px 0 rgba(0, 0, 0, 0);
+}
+
+input[type="text"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
