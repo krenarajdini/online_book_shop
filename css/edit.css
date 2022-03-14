@@ -1,6 +1,6 @@
 .form-container {
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   background-color: lightskyblue;
   display: flex;
   flex-direction: column;

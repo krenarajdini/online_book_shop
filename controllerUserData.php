@@ -45,6 +45,7 @@ if(!isset($_POST["hidSubmit"])){
 if(isset($_POST['signup'])){
     //Getting input
     $name = mysqli_real_escape_string($con, $_POST['name']);
+    $user_name = mysqli_real_escape_string($con, $_POST['user_name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
@@ -85,6 +86,19 @@ if(isset($_POST['signup'])){
         $insert_data = "INSERT INTO user (name, email, password, code, status, gender, phone_number, shipment_address, salt  )
                         values('$name', '$email', '$encpass', '$code', '$status', '$gender', '$phone_number', '$shipment_address', '$salt' )";
         $data_check = mysqli_query($con, $insert_data);
+
+        $email_check = "SELECT * FROM user WHERE email = '$email'";
+        $res = mysqli_query($con, $email_check);
+        $fetch = mysqli_fetch_assoc($res);
+        $u_id = $fetch['u_id'];
+
+
+        $insert_data = "INSERT INTO account (user_name, sold_number, hash_password, u_id)
+        values('$user_name', 0, '$encpass', '$u_id' )";
+        $data_check = mysqli_query($con, $insert_data);
+        echo('Second time'.$encpass);
+
+
         if($data_check){
             $subject = "Email Verification Code";
             $message = "Your verification code is $code";

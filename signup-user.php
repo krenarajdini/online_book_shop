@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-5 offset-md-3 form">
+            <div class="col-md-5 offset-md-4 form">
                 <form id="signup-form" action="signup-user.php" method="POST" autocomplete="">
                     <h2 class="text-center">Signup Form</h2>
                     <p class="text-center">It's quick and easy.</p>
@@ -42,9 +42,9 @@
 
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Username</strong></label>
+                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Full Name</strong></label>
                     </div>
-                        <input id="username" class="form-control" type="text" name="name" placeholder="User Name" required value="<?php echo $name ?>">
+                        <input id="username" class="form-control" type="text" name="name" placeholder="Full Name" required value="<?php echo $name ?>">
                     </div>
                     <p id="username-error"></p>
 
@@ -75,6 +75,14 @@
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Shipment Address</strong></label>
                         <textarea class="textarea" name="shipment_address" placeholder=" input your text here.."  ></textarea>
                     </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>UserName</strong></label>
+                    </div>
+                        <input id="user_name" class="form-control" type="text" name="user_name" placeholder="User Name" required >
+                    </div>
+                    <p id="username-error"></p>
 
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">

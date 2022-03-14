@@ -46,11 +46,7 @@
 				<div class="form-inputs">
 					<input type="text" name="name" disabled="disabled" value="<?php echo $name;?>">
 					<input type="text" name="phone_number" value="<?php echo $phone_number;?>">
-					<select name="gender" id="inputGroupSelect01" >
-						<option value="0" selected>Choose...</option>
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
-					</select>
+					<input type="text" name="gender" disabled="disabled" value="<?php echo $gender;?>" >
 					<input type="text" name="shipment_address" value="<?php echo $shipment_address;?>">
 					<input type="text" name="email" disabled="disabled" value="<?php echo $email;?>">
 					<input type="password" name="password">
@@ -58,13 +54,10 @@
 					<input type="hidden" name="u_id" value= "<?php echo $u_id;?>">
 				</div>
 		</div>
-		<input type="submit" onclick="myFunction()" name="update" class="btn btn-light form-btn" value="Update">
+		<input type="submit" name="update" class="btn btn-light form-btn" value="Update">
 		</form>
 	</div>
-	<script>
-		function myFunction() {
-  			alert("Updated Successfully!");
-	}
+	
 </script>
 </body>
 </html>

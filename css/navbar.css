@@ -8,8 +8,9 @@ nav {
 }
 nav a.navbar-brand {
   color: #fff;
-  font-size: 30px !important;
+  font-size: 20px !important;
   font-weight: 500;
+  margin-left: auto;
 }
 button a {
   color: #6665ee;
@@ -30,4 +31,81 @@ h1 {
 }
 .username {
   width: fit-content;
+  font-size: 15px !important;
+  margin: 0px 0px 0px 0px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  float: right;
+}
+
+li a,
+.dropbtn {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0);
+  text-align: center;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+a.nav-link,
+a.dropbtn {
+  color: black;
+}
+
+#searchbar {
+  margin-left: 15%;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+input[type="text"] {
+  width: 30%;
+  -webkit-transition: width 0.15s ease-in-out;
+  transition: width 0.15s ease-in-out;
+}
+
+/* When the input field gets focus,
+     change its width to 100% */
+input[type="text"]:focus {
+  width: 70%;
+}
+
+#list {
+  font-size: 1.5em;
+  margin-left: 90px;
+}
+
+.animals {
+  display: list-item;
 }
