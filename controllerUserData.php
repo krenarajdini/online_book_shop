@@ -7,7 +7,7 @@ $errors = array();
 
 
 //Check whether the submission is made
-if(!isset($_POST["hidSubmit"])){
+if(!isset($_POST["Submit"])){
 
     //Declarate the necessary variables
     $intisd="";
@@ -71,7 +71,6 @@ if(isset($_POST['signup'])){
 
     //DB insertion
     if(count($errors) === 0){
-        // $password = hash('sha256', $_POST['password']);
 		function createSalt(){
    			$string = md5(uniqid(rand(), true));
     		return substr($string, 0, 3);
@@ -79,8 +78,6 @@ if(isset($_POST['signup'])){
 		$salt = createSalt();
 		$encpass = hash('sha256', $salt . $password);
 
-        echo($encpass);
-    
         $code = rand(999999, 111111);
         $status = "notverified";
         $insert_data = "INSERT INTO user (name, email, password, code, status, gender, phone_number, shipment_address, salt  )
@@ -92,23 +89,18 @@ if(isset($_POST['signup'])){
         $fetch = mysqli_fetch_assoc($res);
         $u_id = $fetch['u_id'];
 
-
         $insert_data = "INSERT INTO account (user_name, sold_number, hash_password, u_id)
         values('$user_name', 0, '$encpass', '$u_id' )";
         $data_check = mysqli_query($con, $insert_data);
-        echo('Second time'.$encpass);
-
-
         if($data_check){
             $subject = "Email Verification Code";
             $message = "Your verification code is $code";
-            $sender = "krenarajdini912@gmail.com";
+            $sender = "ajdinikrenar1@gmail.com";
             if(mail($email, $subject, $message, $sender)){
                 $info = "We've sent a verification code to your email - $email";
                 $_SESSION['info'] = $info;
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
-                echo('Sent from buraydah');
                 header('location: user-otp.php');
                 exit();
             }else{
@@ -160,14 +152,7 @@ if(isset($_POST['signup'])){
             $fetch = mysqli_fetch_assoc($res);
             $fetch_pass = $fetch['password'];
             $salt = $fetch['salt'];
-            echo($password);
-            echo('</br>');
-            echo($salt);
-            echo('</br>');
-
-            echo($fetch_pass);
             $encpass = hash('sha256', $salt . $password);
-
             if(strcmp($fetch_pass, $encpass) == 0){
                 $_SESSION['email'] = $email;
                 $status = $fetch['status'];
