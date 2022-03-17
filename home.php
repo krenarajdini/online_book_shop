@@ -82,12 +82,12 @@ include_once "navbar.php";
 }
 
 ?>
-    <script src="js/animals.js"></script>
+    
 
-    <header class="bg-secondary py-1">
+    <header class="bg-secondary py-1" >
         <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h5 class="display-4 fw-bolder">If you want to make intelligent, get books from here.</h5>
+            <div class="text-center text-white" >
+                <h5 class="display-4 fw-bolder" >If you want to make intelligent, get books from here.</h5>
                 <p class="lead fw-normal text-white-50 mb-0">Shop Now!</p>
             </div>
         </div>
