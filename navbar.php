@@ -3,8 +3,8 @@
         <a class="navbar-brand" href="home.php">
             <img src="PngItem_194580.png" width="30" height="30" alt="" loading="lazy" >Book Shop</a>
             <div>
-                <input type="text" name="book-title" placeholder="Enter keyword, title, author or ISBN">
-                <input type="submit" name="submit">
+                <input class="p-1 border-0" type="search" name="book-title" placeholder="Enter keyword, title, author or ISBN">
+                <input class="p-1 border-0" type="submit" name="search-book" value="Search">
 
             </div>
         </form>
@@ -18,5 +18,32 @@
                 <button type="button" class="btn btn-light mx-1"><a href="edit.php">Account</a></button>
             <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout</a></button></div>
         </div>
+
+</nav>
+
+<nav class="navbar category-bar fixed-top  mt-5 pt-2 px-3 px-lg-3 ">
+    
+    <?php 
+        $category_search = "SELECT title FROM category";
+        $categories = [];
+        $res = mysqli_query($con, $category_search);
+        $totalNumberOfCategories = mysqli_num_rows($res);
+        if ($totalNumberOfCategories > 0) {
+            $index = 0;
+            while ($row = mysqli_fetch_assoc($res)) {
+                $categories[$index] = $row['title'];
+                $index++;
+            }
+        }
+    ?>
+
+    <?php
+        for($index = 0; $index < $totalNumberOfCategories; $index++  ){
+            echo "<a href=\"http://localhost//online_book_shop/home.php?category=" . $categories[$index] ."\" type=\"button\" class=\"btn btn-light mx-1\">" . ucfirst($categories[$index])."</a>";
+        }
+    ?>
+
+    
+          
 
 </nav>

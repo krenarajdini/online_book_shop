@@ -1,3 +1,9 @@
 .username {
   width: fit-content;
 }
+
+header > div {
+  background-image: url("..\\img\\header-background.jpg");
+  background-size: cover;
+  /* background-color: red; */
+}
