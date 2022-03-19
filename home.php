@@ -46,13 +46,14 @@ include_once "navbar.php";
     if(isset($_POST['search-book'])){
         $book_name = $_POST['book-title'];
         $books = [];
-        $book_search = "SELECT * FROM books where title LIKE '%{$book_name}%'";
+        $book_search = "SELECT * FROM books WHERE title LIKE '%$book_name%' or author LIKE '%$book_name%' or book_number LIKE '%$book_name%'";
+
         $res = mysqli_query($con, $book_search);
         $totalNumberOfBooks = mysqli_num_rows($res);
          if ($totalNumberOfBooks > 0) {
             $index = 0;
             while ($row = mysqli_fetch_assoc($res)) {
-                $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 'price' => $row['price'],
+                $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 'price' => $row['price'] , 'book_number' => $row['book_number'],
                         'coverImage' => $row['cover_image']];
                 $index++;
             }
@@ -68,6 +69,7 @@ include_once "navbar.php";
                     </div>
                 </div>
             </header>
+        
         <div class="row gx-4 gx-lg-6 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
                     for($i= 0; $i < $totalNumberOfBooks; $i++){ ?>
@@ -84,6 +86,7 @@ include_once "navbar.php";
                                                                 <span><b>Price: </b><?php echo $books[$i]->price ?></span>
                                                         </div>
                             <p class="m-0"><small><?php echo $books[$i]->author ?></small></p>
+                            <p class="m-0"><small><?php echo $books[$i]->book_number ?></small></p>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -110,7 +113,7 @@ include_once "navbar.php";
              if ($totalNumberOfBooks > 0) {
                 $index = 0;
                 while ($row = mysqli_fetch_assoc($res)) {
-                    $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 'price' => $row['price'],
+                    $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 'price' => $row['price'], 'book_number' => $row['book_number'],
                             'coverImage' => $row['cover_image']];
                     $index++;
                 }
@@ -142,6 +145,7 @@ include_once "navbar.php";
                                                                     <span><b>Price: </b><?php echo $books[$i]->price ?></span>
                                                             </div>
                                 <p class="m-0"><small><?php echo $books[$i]->author ?></small></p>
+                                <p class="m-0"><small><?php echo $books[$i]->book_number ?></small></p>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -177,7 +181,7 @@ include_once "navbar.php";
              if ($totalNumberOfBooks > 0) {
                 $index = 0;
                 while ($row = mysqli_fetch_assoc($res)) {
-                    $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 'price' => $row['price'],
+                    $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 'price' => $row['price'], 'book_number' => $row['book_number'],
                             'coverImage' => $row['cover_image']];
                     $index++;
                 }
@@ -209,6 +213,7 @@ include_once "navbar.php";
                                                                     <span><b>Price: </b><?php echo $books[$i]->price ?></span>
                                                             </div>
                                 <p class="m-0"><small><?php echo $books[$i]->author ?></small></p>
+                                <p class="m-0"><small><?php echo $books[$i]->book_number ?></small></p>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
