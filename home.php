@@ -73,8 +73,8 @@ include_once "navbar.php";
         <div class="row gx-4 gx-lg-6 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
                     for($i= 0; $i < $totalNumberOfBooks; $i++){ ?>
-                <div class="col mb-6">
-                    <div class="card product-item">
+                <div name ="card" class="col mb-5">
+                    <div name ="card" class="card product-item">
                         <!-- Product image-->
                         <img class=" card-image book-cover" src="<?php echo $books[$i]->coverImage ?>" alt="...">
                         <!-- Product details-->
@@ -132,7 +132,7 @@ include_once "navbar.php";
             <div class="row gx-4 gx-lg-6 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
                         for($i= 0; $i < $totalNumberOfBooks; $i++){ ?>
-                    <div class="col mb-6">
+                    <div name ="card" class="col mb-5">
                         <div class="card product-item">
                             <!-- Product image-->
                             <img class=" card-image book-cover" src="<?php echo $books[$i]->coverImage ?>" alt="...">
@@ -200,7 +200,7 @@ include_once "navbar.php";
             <div class="row gx-4 gx-lg-6 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
                         for($i= 0; $i < $totalNumberOfBooks; $i++){ ?>
-                    <div class="col mb-6">
+                    <div name ="card" class="col mb-5">
                         <div class="card product-item">
                             <!-- Product image-->
                             <img class=" card-image book-cover" src="<?php echo $books[$i]->coverImage ?>" alt="...">
@@ -229,10 +229,10 @@ include_once "navbar.php";
             </div>
         <?php   }?>
 
-        <footer class="py-5 bg-dark">
+        <footer class="py-4 bg-dark">
             <div class="container">
               <p class="m-0 text-center text-white">Copyright © Books 2021</p>
-              <p class="m-0 text-center text-white">Developed By: <a href="krenarajdini912@gmail.com">krenarajdini</a></p>
+              <p class="m-0 text-center text-white">Developed By: <a href="#">krenarajdini</a></p>
           </div>
         </footer>
 </body>

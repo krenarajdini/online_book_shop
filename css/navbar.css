@@ -83,12 +83,6 @@ a.dropbtn {
   color: black;
 }
 
-#searchbar {
-  margin-left: 15%;
-  padding: 15px;
-  border-radius: 10px;
-}
-
 input[type="text"] {
   width: 30%;
   -webkit-transition: width 0.15s ease-in-out;
@@ -108,4 +102,8 @@ input[type="text"]:focus {
 .category-bar {
   display: flex;
   justify-content: flex-start;
+}
+
+.active-category {
+  background-color: rgb(224, 224, 0);
 }
