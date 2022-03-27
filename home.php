@@ -28,11 +28,13 @@ if ($email != false && $password != false) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo $fetch_info['name'] ?> | Home</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/navbar.css">
-
+  
+    
 </head>
 <body>
     <?php
@@ -111,8 +113,20 @@ include_once "navbar.php";
                 $book_search .= $and . " category_id LIKE '%$category_id%' ";
                 $and = " AND ";
             }
-            // $year = isset($_POST['year']) ? $_POST['year'] : "";
-            // $price = isset($_POST['price']) ? $_POST['price'] : "";
+            if(isset($_POST['year']) && $_POST['year'] != ""){
+                $year = $_POST['year'];
+                $book_search .= $and . " year LIKE '%$year%' ";
+                $and = " AND ";
+            }
+            if(isset($_POST['price-max']) && $_POST['price-max'] != ""){
+                $price_max = $_POST['price-max'];
+                $book_search .= $and . " price <= '$price_max' ";
+                $and = " AND ";
+            }
+            if(isset($_POST['price-min']) && $_POST['price-min'] != ""){
+                $price_min = $_POST['price-min'];
+                $book_search .= $and . " price >= '$price_min' ";
+            }
             $res = mysqli_query($con, $book_search);
             $totalNumberOfBooks = mysqli_num_rows($res);
             if ($totalNumberOfBooks > 0) {

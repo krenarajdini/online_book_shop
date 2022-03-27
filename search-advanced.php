@@ -63,66 +63,57 @@ body {
 	<div class="row">
 		<div class="col-md-12">
             <div class="input-group" id="boot-search-box">
-                <input type="text" class="form-control" placeholder="Type a search term ..." />
-                <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" method="POST" action="home.php" role="form">
-                                  <div class="form-group">
-                                    <label for="filter">Category:</label>
-                                    <select class="form-control" name="category">
-                                        <option value="default" selected>Whole category</option>
-                                        <?php 
-                                            for($i = 0; $i < $totalNumberOfCategories; $i++){
-                                                $category = $categories[$i];
-                                                 echo "<option value=\"{$category}\">{$category}</option>";
-                                            }
-                                           
-                                        
-                                        ?>
-                                        
-                                       
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Title:</label> 
-                                    <input class="form-control" name="title" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Author:</label>
-                                    <input class="form-control" name="author" type="text" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="contain">Description:</label>
-                                    <input class="form-control" name="description" type="text" />
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="contain">Year:</label>
-                                    <input class="form-control" name="year" type="year" />
-                                  </div>
-                                  
-                                 <div class="form-group">
-                                    <label for="password1" class="col-sm-3 control-label">Price Range:</label>
-                                <div class="col-sm-3">
-                                    <input type="text" name="price-max" class="form-control" id="max-price" placeholder="Max"> <br /><br /> 
-                                    <input type="text" name="price-min" class="form-control" id="min-price" placeholder="Min">
-                                </div>
-                                  <br /><br /><br /><br />                        
-                                  <button type="submit" class="btn btn-primary btn-block">Search :: <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success "><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                        </form>
+                <form class="form-horizontal" method="POST" action="home.php" role="form">
+                    <div class="form-group">
+                    <label for="filter">Category:</label>
+                    <select class="form-control" name="category">
+                        <option value="default" selected>Whole category</option>
+                        <?php 
+                            for($i = 0; $i < $totalNumberOfCategories; $i++){
+                                $category = $categories[$i];
+                                    echo "<option value=\"{$category}\">{$category}</option>";
+                            }
+                            
+                        
+                        ?>
+                        
+                        
+                    </select>
                     </div>
+                    <div class="form-group">
+                    <label for="contain">Title:</label> 
+                    <input class="form-control" name="title" type="text" />
+                    </div>
+                    <div class="form-group">
+                    <label for="contain">Author:</label>
+                    <input class="form-control" name="author" type="text" />
+                    </div>
+                    <div class="form-group">
+                    <label for="contain">Description:</label>
+                    <input class="form-control" name="description" type="text" />
+                    </div>
+
+                    <div class="form-group">
+                    <label for="contain">Year:</label>
+                    <input class="form-control" name="year" type="year" />
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="password1" class="col-sm-3 control-label">Price Range:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="price-max" class="form-control" id="max-price" placeholder="Max"> <br /><br /> 
+                    <input type="text" name="price-min" class="form-control" id="min-price" placeholder="Min">
                 </div>
+                    <br /><br /><br /><br />                        
+                    <button type="submit" class="btn btn-primary btn-block">Search :: <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                
             </div>
-          </div>
         </div>
-	</div>
+      
+        </form>
+        </div>
+        </div>
+        </div>            
 </div>
 </body>
 </html>

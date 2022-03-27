@@ -1,3 +1,22 @@
+<style>
+    .search-icon{
+        width: 15px;
+
+    }
+    .search-btn{
+        padding: 0.4em;
+        border: 0;
+        background-color: #ddd;
+        border-top-left-radius: 0.4em;   
+        border-bottom-left-radius: 0.4em;  
+    }
+    .search-btn:focus{
+        outline: none;
+    }
+    .search-btn:hover{
+        background-color: lightblue;
+    }
+</style>
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
         
 
@@ -9,8 +28,9 @@
             
                 <div class="input-group md-form form-sm form-1 pl-0">
                     <div class="input-group-prepend">
-                    <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fa fa-search"
-                                                                                        aria-hidden="true"></i></span>
+                
+                        <button class="search-btn" type="submit" ><img class="search-icon" src="img\search-icon.png" alt=""></button>
+                 
                     </div>
                     <input class="form-control my-0 py-1" name="book-title" type="search" placeholder="Search" aria-label="Search">
                 </div>
