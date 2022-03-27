@@ -13,6 +13,7 @@
 		$shipment_address = $res['shipment_address'];
 		$email = $res['email'];
 		$password = $res['password'];
+		$cpassword = $res['cpassword'];
 	}
 
 ?>
@@ -50,7 +51,7 @@
 					<input type="text" name="shipment_address" value="<?php echo $shipment_address;?>">
 					<input type="text" name="email" disabled="disabled" value="<?php echo $email;?>">
 					<input type="password" name="password">
-					<input type="password" name="confpassword">
+					<input type="password" name="cpassword">
 					<input type="hidden" name="u_id" value= "<?php echo $u_id;?>">
 				</div>
 		</div>

@@ -1,27 +1,40 @@
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
-        <form class="form-inline" method="POST" action="home.php" autocomplete="off">
-        <a class="navbar-brand" href="home.php">
-            <img src="img\PngItem_194580.png" width="30" height="30" alt="" loading="lazy" >Book Shop</a>
-            <div>
-                <input class="p-1 border-0" type="search" name="book-title" placeholder="search.." title="Enter keyword, title, author or ISBN">
-                <input class="p-1 border-0" type="submit" name="search-book" value="Search">
+        
+
+       <form class="form-inline" method="POST" action="home.php" autocomplete="off">
+             <a class="navbar-brand" href="home.php">
+                <img src="img\PngItem_194580.png" width="30" height="30" alt="" loading="lazy" >Book Shop</a>
+        
+            
+            
+                <div class="input-group md-form form-sm form-1 pl-0">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fa fa-search"
+                                                                                        aria-hidden="true"></i></span>
+                    </div>
+                    <input class="form-control my-0 py-1" name="book-title" type="search" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="input-group-prepend ml-1">
+                   <a href="search-advanced.php" class="input-group-text btn ">Advanced Search</a>
+                </div>
                 
-            </div>
-        </form>
-        <div class="from-inline ">
-            <div class="username">
-                <img src="img\icon-user-preview.png" width="30" height="30" alt="" loading="lazy">
-                Welcome <?php echo ucwords($name) ?>
-                <div title="Cart" class="btn btn-light mx-1 "><a href="#">Cart</a>
-                <img src="img\shop.png"
-                alt="cart" width="25px" height="25px"></div>
-                <button type="button" class="btn btn-light mx-1"><a href="edit.php">Account</a></button>
-                <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout</a></button></div>
+            </form>
+
+        
+            
+
+            
+        <div class="username" >
+            
+            <img src="img\icon-user-preview.png" width="30" height="30" alt="" loading="lazy">
+            Welcome <?php echo ucwords($name) ?>
+            <button type="button" class="btn btn-light mx-1">
+            <a href="product-cart.php">Cart <img src="img\shop.png" alt="cart" width="25px" height="25px"></a></button>
+            <button type="button" class="btn btn-light mx-1"><a href="edit.php">Account  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
+            <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout  <img src="img\logout_icon.png" alt="cart" width="25px" height="25px"></a></button>
         </div>
 
         
-
-
 </nav>
 
 
@@ -67,5 +80,6 @@
         </nav>
        
 <?php }?>
+
 
 
