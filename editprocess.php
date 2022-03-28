@@ -2,9 +2,9 @@
 session_start();
 include_once("connection.php");
 $email = $_SESSION['email'];
-
+$errors = array();
 if(isset($_POST['edit-user'])){	
-    $errors = array();
+    
  
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
@@ -14,11 +14,12 @@ if(isset($_POST['edit-user'])){
     //Validation
 
     if($password !== $cpassword){
-        $errors['password'] = "Confirm password not matched!";
+        $errors['password-error-message'] = "Confirm password not matched!";
     }
 
     //DB insertion
     if(count($errors) === 0){
+        echo "success";
 		function createSalt(){
    			$string = md5(uniqid(rand(), true));
     		return substr($string, 0, 3);

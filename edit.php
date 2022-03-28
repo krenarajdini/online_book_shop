@@ -95,8 +95,11 @@ include_once("editprocess.php");
                             <div class="form-group">
                                 <label for="cpassword" class="control-label">Current Password</label>
                                 <input type="password" name="cpassword" class="form-control form" placeholder="Enter value to change password">
+                                <p class="control-label text-danger"> <?php echo array_key_exists("password-error-message", $errors) ?  $errors["password-error-message"] : "" ; ?></p>
                             </div>
-                            <div class="form-group d-flex justify-content-end">
+                           
+                                
+                            
                                 <button type="submit" class="btn btn-dark btn-flat">Update</button>
                             </div>
                             <input type="hidden" name="edit-user">
