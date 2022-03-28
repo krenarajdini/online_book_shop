@@ -3,30 +3,39 @@ session_start();
 include_once("connection.php");
 $email = $_SESSION['email'];
 
-if(isset($_POST['update'])){	
-  
-
-    //Clean input
-    $u_id = mysqli_real_escape_string($con, $_POST['u_id']);
-    $phone_number = mysqli_real_escape_string($con, $_POST['phone_number']);
-    $shipment_address = mysqli_real_escape_string($con, $_POST['shipment_address']);
+if(isset($_POST['edit-user'])){	
+    $errors = array();
+ 
     $password = mysqli_real_escape_string($con, $_POST['password']);
+    $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
+    $phone_number  = mysqli_real_escape_string($con, $_POST['phone_number']);
+    $shipment_address = mysqli_real_escape_string($con, $_POST['shipment_address']);
 
     //Validation
-    if( empty($phone_number) || empty($shipment_address) || empty($password) ) {	
-        if(empty($phone_number)) {
-            echo '<font color="red">Phone number field is empty.</font><br>';
-        }
-        if(empty($shipment_address)) {
-            echo '<font color="red">Shipment address field is empty.</font><br>';
-        }
-        if(empty($password)) {
-            echo '<font color="red">Password field is empty.</font><br>';
-        }		
-    } else {	
-        $result = mysqli_query($con, "UPDATE user SET phone_number='$phone_number',
-                shipment_address='$shipment_address', password='$password' WHERE u_id=$u_id");
-        header("Location: home.php");
+
+    if($password !== $cpassword){
+        $errors['password'] = "Confirm password not matched!";
     }
+
+    //DB insertion
+    if(count($errors) === 0){
+		function createSalt(){
+   			$string = md5(uniqid(rand(), true));
+    		return substr($string, 0, 3);
+		}
+		$salt = createSalt();
+		$encpass = hash('sha256', $salt . $password);
+
+        
+        $insert_data = "UPDATE user SET password = '$encpass', salt = '$salt', phone_number = '$phone_number', shipment_address = '$shipment_address'
+                 WHERE email = '$email'";
+        $update_user_result = mysqli_query($con, $insert_data);
+
+    
+        $update_account = "UPDATE account SET hash_password = '$encpass' WHERE u_id = '$u_id'";
+        $update_account_result = mysqli_query($con, $insert_data);
+        
+    }
+
 }
 ?>

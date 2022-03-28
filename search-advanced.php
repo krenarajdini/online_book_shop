@@ -40,7 +40,8 @@ body {
     </style>
 
 </head>
-<body>     
+<body>  
+      
     <?php
         require "connection.php";
         $category_search = "SELECT title FROM category";
@@ -70,13 +71,12 @@ body {
                         <option value="default" selected>Whole category</option>
                         <?php 
                             for($i = 0; $i < $totalNumberOfCategories; $i++){
-                                $category = $categories[$i];
+                                $category = ucfirst($categories[$i]);
                                     echo "<option value=\"{$category}\">{$category}</option>";
                             }
                             
                         
                         ?>
-                        
                         
                     </select>
                     </div>

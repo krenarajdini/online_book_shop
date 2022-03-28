@@ -1,7 +1,9 @@
 <style>
     .search-icon{
         width: 15px;
-
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
     .search-btn{
         padding: 0.4em;
@@ -14,23 +16,22 @@
         outline: none;
     }
     .search-btn:hover{
-        background-color: lightblue;
+        background-color: #428bca;
     }
+    
 </style>
+
+
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
         
 
        <form class="form-inline" method="POST" action="home.php" autocomplete="off">
              <a class="navbar-brand" href="home.php">
                 <img src="img\PngItem_194580.png" width="30" height="30" alt="" loading="lazy" >Book Shop</a>
-        
-            
-            
+                
                 <div class="input-group md-form form-sm form-1 pl-0">
                     <div class="input-group-prepend">
-                
                         <button class="search-btn" type="submit" ><img class="search-icon" src="img\search-icon.png" alt=""></button>
-                 
                     </div>
                     <input class="form-control my-0 py-1" name="book-title" type="search" placeholder="Search" aria-label="Search">
                 </div>
@@ -38,22 +39,18 @@
                    <a href="search-advanced.php" class="input-group-text btn ">Advanced Search</a>
                 </div>
                 
-            </form>
-
-        
+                <div class="input-group  username" >
             
-
-            
-        <div class="username" >
-            
-            <img src="img\icon-user-preview.png" width="30" height="30" alt="" loading="lazy">
-            Welcome <?php echo ucwords($name) ?>
-            <button type="button" class="btn btn-light mx-1">
-            <a href="product-cart.php">Cart <img src="img\shop.png" alt="cart" width="25px" height="25px"></a></button>
-            <button type="button" class="btn btn-light mx-1"><a href="edit.php">Account  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
-            <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout  <img src="img\logout_icon.png" alt="cart" width="25px" height="25px"></a></button>
-        </div>
-
+                    <img src="img\icon-user-preview.png" width="30" height="30" alt="" loading="lazy">
+                    Welcome <?php echo ucwords($_SESSION['name']) ?>
+                    <button type="button" class="btn btn-light mx-1">
+                    <a href="product-cart.php">Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-count">0</span><img src="img\shop.png" alt="cart" width="25px" height="25px"></a></button>
+                    
+                    <button type="button" class="btn btn-light mx-1"><a href="order-cart.php">Account  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
+                    <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout  <img src="img\logout_icon.png" alt="cart" width="25px" height="25px"></a></button>
+                </div>
+                
+        </form>    
         
 </nav>
 

@@ -107,3 +107,26 @@ input[type="text"]:focus {
 .active-category {
   background-color: rgb(224, 224, 0);
 }
+.search-icon {
+  width: 15px;
+}
+.search-btn {
+  padding: 0.4em;
+  border: 0;
+  background-color: #ddd;
+  border-top-left-radius: 0.4em;
+  border-bottom-left-radius: 0.4em;
+  margin-right: 1px;
+}
+.search-btn:focus {
+  outline: none;
+}
+.search-btn:hover {
+  background-color: #428bca;
+}
+.form-inline {
+  width: auto;
+}
+.username {
+  margin-left: 345px;
+}

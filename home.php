@@ -158,14 +158,22 @@ include_once "navbar.php";
         
         <!-- Deafult home page -->
         
-            <header class="py-1" >
-                <div class=" p-5 mt-5 ">
-                    <div class="text-center" >
-                        <h5 class="display-4 fw-bolder" >If you want to make intelligent, get books from here.</h5>
-                        <p class="lead fw-normal mb-0">Shop Now!</p>
+           
+
+                <header class="py-1" >
+                    <div class=" p-5 mt-5 ">
+                        <div class="text-center" >
+                         <?php if(!isset($_GET['category'])){ ?>
+                            <h5 class="display-4 fw-bolder" >If you want to make intelligent, get books from here.</h5>
+                            <p class="lead fw-normal mb-0">Shop Now!</p>
+
+                        <?php }else{?>
+                            <h5 class="display-4 fw-bolder" >Books in <?php echo ucfirst($_GET['category']); ?></h5>
+                        <?php } ?>
+                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
+          
             <div class="row gx-4 gx-lg-6 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
                         for($i= 0; $i < count($books); $i++){ ?>
@@ -198,7 +206,7 @@ include_once "navbar.php";
             </div>
 
 
-
+<!-- Footer-->
         <footer class="py-4 bg-dark">
             <div class="container">
               <p class="m-0 text-center text-white">Copyright © Books 2021</p>

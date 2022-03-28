@@ -1,141 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cart.css">
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
+<html lang="en" style="height: auto;"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<title>Online Book Shop</title>
+    <link rel="icon" href="http://localhost/book_shop/uploads/1640818140_depositphotos_273963164-stock-illustration-bookstore-logo-template-design-logo.jpg">
+    <!-- Google Font: Source Sans Pro -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback"> -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+      <!-- DataTables -->
+  <link rel="stylesheet" href="http://localhost/book_shop/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="http://localhost/book_shop/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="http://localhost/book_shop/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+   <!-- Select2 -->
+  <link rel="stylesheet" href="http://localhost/book_shop/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="http://localhost/book_shop/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="http://localhost/book_shop/dist/css/adminlte.css">
+    <link rel="stylesheet" href="http://localhost/book_shop/dist/css/custom.css">
+    <link rel="stylesheet" href="http://localhost/book_shop/assets/css/styles.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="http://localhost/book_shop/plugins/summernote/summernote-bs4.min.css">
+     <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="http://localhost/book_shop/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <style type="text/css">/* Chart.js */
+      @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+    </style>
 
+     
+    <style>
+    #main-header{
+        position:relative;
+        background: rgb(0,0,0)!important;
+        background: radial-gradient(circle, rgba(0,0,0,0.48503151260504207) 22%, rgba(0,0,0,0.39539565826330536) 49%, rgba(0,212,255,0) 100%)!important;
+    }
+    #main-header:before{
+        content:"";
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-image:url(http://localhost/book_shop/uploads/1640818320_front-view-desk-with-stacked-books-copy-space.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: drop-shadow(0px 7px 6px black);
+        z-index:-1;
+    }
 
-<div class="container px-4 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-5">
-            <h4 class="heading">Shopping Bag</h4>
+ </style>
+  </head><body style="height: auto;">
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex justify-content-end mb-2">
+                <button class="btn btn-outline-dark btn-flat btn-sm" type="button" id="empty_cart">Empty Cart</button>
+            </div>
         </div>
-        <div class="col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <h6 class="mt-2">Format</h6>
-                </div>
-                <div class="col-4">
-                    <h6 class="mt-2">Quantity</h6>
-                </div>
-                <div class="col-4">
-                    <h6 class="mt-2">Price</h6>
+        <div class="card rounded-0">
+            <div class="card-body">
+                <h3><b>Cart List</b></h3>
+                <hr class="border-dark">
+                                    <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
+                        <div class="d-flex align-items-center col-8">
+                            <span class="mr-2"><a href="javascript:void(0)" class="btn btn-sm btn-outline-danger rem_item" data-id="9"><i class="fa fa-trash"></i></a></span>
+                            <img src="http://localhost/book_shop/uploads/product_3/english grammar in use.jpg" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" alt="">
+                            <div>
+                                <p class="mb-1 mb-sm-1">English Grammar in Use</p>
+                                
+                                <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price">2,500</span></small></p>
+                                <div>
+                                <div class="input-group" style="width:130px !important">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-sm btn-outline-secondary min-qty" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="1" aria-describedby="button-addon1" data-id="9" readonly="">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-outline-secondary plus-qty" type="button" id="button-addon1"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right align-items-center d-flex justify-content-end">
+                            <h4><b class="total-amount">2,500</b></h4>
+                        </div>
+                    </div>
+                                <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
+                    <div class="col-8 d-flex justify-content-end"><h4>Grand Total:</h4></div>
+                    <div class="col d-flex justify-content-end"><h4 id="grand-total">2,500</h4></div>
                 </div>
             </div>
+        </div>
+        <div class="d-flex w-100 justify-content-end">
+            <a href="./?p=checkout" class="btn btn-sm btn-flat btn-dark">Checkout</a>
         </div>
     </div>
-    <div class="row d-flex justify-content-center border-top">
-        <div class="col-5">
-            <div class="row d-flex">
-                <div class="book"> <img src="https://i.imgur.com/2DsA49b.jpg" class="book-img"> </div>
-                <div class="my-auto flex-column d-flex pad-left">
-                    <h6 class="mob-text">Thinking, Fast and Slow</h6>
-                    <p class="mob-text">Daniel Kahneman</p>
-                </div>
-            </div>
-        </div>
-        <div class="my-auto col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <p class="mob-text">Digital</p>
-                </div>
-                <div class="col-4">
-                    <div class="row d-flex justify-content-end px-3">
-                        <p class="mb-0" id="cnt1">1</p>
-                        <div class="d-flex flex-column plus-minus"> <span class="vsm-text plus">+</span> <span class="vsm-text minus">-</span> </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <h6 class="mob-text">$9.99</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center border-top">
-        <div class="col-5">
-            <div class="row d-flex">
-                <div class="book"> <img src="https://i.imgur.com/Oj1iQUX.jpg" class="book-img"> </div>
-                <div class="my-auto flex-column d-flex pad-left">
-                    <h6 class="mob-text">Homo Deus: A Brief<br>History of Tomorrow</h6>
-                    <p class="mob-text">Yuval Noah Harari</p>
-                </div>
-            </div>
-        </div>
-        <div class="my-auto col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <p class="mob-text">Paperback</p>
-                </div>
-                <div class="col-4">
-                    <div class="row d-flex justify-content-end px-3">
-                        <p class="mb-0" id="cnt2">1</p>
-                        <div class="d-flex flex-column plus-minus"> <span class="vsm-text plus">+</span> <span class="vsm-text minus">-</span> </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <h6 class="mob-text">$13.50</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="row">
-                    <div class="col-lg-3 radio-group">
-                        <div class="row d-flex px-3 radio"> <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
-                            <p class="my-auto">Credit Card</p>
-                        </div>
-                        <div class="row d-flex px-3 radio gray"> <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
-                            <p class="my-auto">Debit Card</p>
-                        </div>
-                        <div class="row d-flex px-3 radio gray mb-3"> <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
-                            <p class="my-auto">PayPal</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="row px-2">
-                            <div class="form-group col-md-6"> <label class="form-control-label">Name on Card</label> <input type="text" id="cname" name="cname" placeholder="Johnny Doe"> </div>
-                            <div class="form-group col-md-6"> <label class="form-control-label">Card Number</label> <input type="text" id="cnum" name="cnum" placeholder="1111 2222 3333 4444"> </div>
-                        </div>
-                        <div class="row px-2">
-                            <div class="form-group col-md-6"> <label class="form-control-label">Expiration Date</label> <input type="text" id="exp" name="exp" placeholder="MM/YYYY"> </div>
-                            <div class="form-group col-md-6"> <label class="form-control-label">CVV</label> <input type="text" id="cvv" name="cvv" placeholder="***"> </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mt-2">
-                        <div class="row d-flex justify-content-between px-4">
-                            <p class="mb-1 text-left">Subtotal</p>
-                            <h6 class="mb-1 text-right">$23.49</h6>
-                        </div>
-                        <div class="row d-flex justify-content-between px-4">
-                            <p class="mb-1 text-left">Shipping</p>
-                            <h6 class="mb-1 text-right">$2.99</h6>
-                        </div>
-                        <div class="row d-flex justify-content-between px-4" id="tax">
-                            <p class="mb-1 text-left">Total (tax included)</p>
-                            <h6 class="mb-1 text-right">$26.48</h6>
-                        </div> <button class="btn-block btn-blue"> <span> <span id="checkout">Checkout</span> <span id="check-amt">$26.48</span> </span> </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="js/cart-product.js"></script>
+</section>
+
+<!-- Footer-->
+<footer class="py-4 bg-dark">
+            <div class="container">
+              <p class="m-0 text-center text-white">Copyright © Books 2021</p>
+              <p class="m-0 text-center text-white">Developed By: <a href="#">krenarajdini</a></p>
+          </div>
+        </footer>
 </body>
 </html>
-        
