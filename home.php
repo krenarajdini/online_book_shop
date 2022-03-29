@@ -180,17 +180,17 @@ include_once "navbar.php";
                     <div name ="card" class="col mb-5">
                         <div class="card product-item">
                             <!-- Product image-->
-                            <img class=" card-image book-cover" src="<?php echo $books[$i]->coverImage ?>" alt="...">
+                            <img class=" card-image book-cover " src="<?php echo $books[$i]->coverImage ?>" alt="...">
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder"> <?php echo $books[$i]->title ?> </h5>
                                     <!-- Product price-->
-                                                                    <span><b>Price: </b><?php echo $books[$i]->price ?></span>
-                                                            </div>
+                                    <span><b>Price: </b><?php echo $books[$i]->price ?></span>
+                                </div>
                                 <p class="m-0"><small><?php echo $books[$i]->author ?></small></p>
-                                <p class="m-0"><small><?php echo $books[$i]->book_number ?></small></p>
+                                <p class="m-0"><small>ISBN: <?php echo $books[$i]->book_number ?></small></p>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
