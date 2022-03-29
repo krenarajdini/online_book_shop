@@ -47,13 +47,11 @@ include_once "navbar.php";
 
     if(isset($_GET['category'])){
         $category = $_GET['category'];
-        
         $category_search = "SELECT category_id FROM category where title  = '$category'";
         $res = mysqli_query($con, $category_search);
         $category_id = mysqli_fetch_assoc($res)['category_id'];
 
-
-
+        
         $book_search = "SELECT * FROM books where category_id = '$category_id'";
         $res = mysqli_query($con, $book_search);
         $totalNumberOfBooks = mysqli_num_rows($res);
@@ -75,7 +73,6 @@ include_once "navbar.php";
 
             $book_name = $_POST['book-title'];
             $book_search = "SELECT * FROM books WHERE title LIKE '%$book_name%'";
-
             $res = mysqli_query($con, $book_search);
             $totalNumberOfBooks = mysqli_num_rows($res);
             if ($totalNumberOfBooks > 0) {
@@ -155,11 +152,7 @@ include_once "navbar.php";
         } 
     }
 ?>
-        
         <!-- Deafult home page -->
-        
-           
-
                 <header class="py-1" >
                     <div class=" p-5 mt-5 ">
                         <div class="text-center" >
