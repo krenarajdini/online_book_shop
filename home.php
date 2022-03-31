@@ -33,6 +33,7 @@ if ($email != false && $password != false) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/navbar.css">
+    
   
     
 </head>
@@ -196,7 +197,7 @@ include_once "navbar.php";
                     <div name ="card" class="col mb-5">
                         <div class="card product-item">
                             <!-- Product image-->
-                            <img class=" card-image book-cover " src="<?php echo $books[$i]->coverImage ?>" alt="...">
+                            <img class=" card-image book-cover " src="<?php echo $books[$i]->coverImage ?>" width="350" height="400" alt="...">
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="">
@@ -209,9 +210,13 @@ include_once "navbar.php";
                                 <p class="m-0"><small>ISBN: <?php echo $books[$i]->book_number ?></small></p>
                             </div>
                             <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="card-footer  pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <a class="btn btn-flat btn-primary" href="view-product.php?book_number=<?php echo $books[$i]->book_number ?>">View</a>
+                                    <br>
+
+                                    <button type="button" class="btn btn-link"><img src="img\icons8-cart-64.png" width="25" height="25"></button>
+                                    
                                 </div>
 
                             </div>

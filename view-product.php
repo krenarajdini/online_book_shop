@@ -41,14 +41,14 @@
         
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0 " loading="lazy" id="display-img" src="<?php echo $book['cover_image']?>" alt="...">
+                <img class="card-img-top mb-5 mb-md-0 " loading="lazy" id="display-img" src="<?php echo $book['cover_image']?>" width="250" height="500" alt="...">
                 <div class="mt-2 row gx-2 gx-lg-3 row-cols-4 row-cols-md-3 row-cols-xl-4 justify-content-start">
                     <div class="col">
                         <a href="" class="view-image active"><img src="<?php echo $book['cover_image']?>" loading="lazy" class="img-thumbnail" alt=""></a>
                     </div>
         	</div>
             </div>
-            <div class="col-md-6">
+                <div class="col-md-6">
                  <p class="display-4"><?php echo $book['title'] ?></p>
                 <div class="small mb-1">SKU: <?php echo $book['book_number'] ?></div>
                 <p class="m-0"><small>Author: <?php echo $book['author'] ?></small></p>
@@ -95,9 +95,11 @@
                             </div>
                         </div>
                         <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="card-footer pt-0 border-top-0 bg-transparent">
                             <div class="text-center">
                                 <a class="btn btn-flat btn-primary " href="view-product.php?book_number=<?php echo $books[$i]->book_number ?>">View</a>
+                            <br>
+                                <button type="button" class="btn btn-link"><img src="img\icons8-cart-64.png" width="25" height="25"></button>
                             </div>
                             
                         </div>

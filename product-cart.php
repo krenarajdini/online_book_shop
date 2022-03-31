@@ -45,8 +45,8 @@
                 <hr class="border-dark">
                                     <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
                         <div class="d-flex align-items-center col-8">
-                            <span class="mr-2"><a href="javascript:void(0)" class="btn btn-sm btn-outline-danger rem_item" data-id="9"><i class="fa fa-trash"></i></a></span>
-                            <img src="http://localhost/book_shop/uploads/product_3/english grammar in use.jpg" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" alt="">
+                            <span class="mr-2"><a href="" class="btn btn-sm btn-outline-danger rem_item" data-id="9"><i class="fa fa-trash"></i></a></span>
+                            <img src="http://localhost/book_shop/uploads/product_3/english grammar in use.jpg" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" width="150" height="150" alt="">
                             <div>
                                 <p class="mb-1 mb-sm-1">English Grammar in Use</p>
                                 
