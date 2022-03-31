@@ -11,27 +11,50 @@
 <body style="height: auto;">
 <?php 
      session_start();
-     include_once("navbar.php"); ?>
+     include_once("navbar.php");
+     include_once("connection.php");
+
+    $book_number = intval($_GET['book_number']);
+    echo $book_number;
+    $book_search = "SELECT * FROM books WHERE book_number = '$book_number'";
+    $res = mysqli_query($con, $book_search);
+    $book = mysqli_fetch_assoc($res);
+
+    //Recent Products
+    $books = [];
+        $book_search = "SELECT * FROM books LIMIT 3";
+        $res = mysqli_query($con, $book_search);
+        $totalNumberOfBooks = mysqli_num_rows($res);
+         if ($totalNumberOfBooks > 0) {
+            $index = 0;
+            while ($row = mysqli_fetch_assoc($res)) {
+                $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 
+                    'price' => $row['price'], 'book_number' => $row['book_number'], 'description' => $row['description'],
+                        'coverImage' => $row['cover_image']];
+                $index++;
+            }
+        } 
+   
+     ?>
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0 " loading="lazy" id="display-img" src="http://localhost/book_shop/uploads/product_4/english_dummies.jpg" alt="...">
+                <img class="card-img-top mb-5 mb-md-0 " loading="lazy" id="display-img" src="<?php echo $book['cover_image']?>" alt="...">
                 <div class="mt-2 row gx-2 gx-lg-3 row-cols-4 row-cols-md-3 row-cols-xl-4 justify-content-start">
                     <div class="col">
-                        <a href="javascript:void(0)" class="view-image active"><img src="http://localhost/book_shop/uploads/product_4/english_dummies.jpg" loading="lazy" class="img-thumbnail" alt=""></a>
+                        <a href="javascript:void(0)" class="view-image active"><img src="<?php echo $book['cover_image']?>" loading="lazy" class="img-thumbnail" alt=""></a>
                     </div>
         	</div>
             </div>
             <div class="col-md-6">
-                <!-- <div class="small mb-1">SKU: BST-498</div> -->
-                <h1 class="display-5 fw-bolder border-bottom border-primary pb-1">English Grammar for Dummies</h1>
-                <p class="m-0"><small>By: Geraldine Woods</small></p>
+                 <p class="display-4"><?php echo $book['title'] ?></p>
+                <div class="small mb-1">SKU: <?php echo $book['book_number'] ?></div>
+                <p class="m-0"><small>Author: <?php echo $book['author'] ?></small></p>
                 <div class="fs-5 mb-5">
-                ₱ <span id="price">2,000</span>
-                <br>
-                <span><small><b>Available Stock:</b> <span id="avail">50</span></small></span>
+                    <span id="price">Price: <?php echo $book['price'] ?></span>
+                    <br>
                 </div>
                 <form action="" id="add-cart">
                 <div class="d-flex">
@@ -44,7 +67,7 @@
                     </button>
                 </div>
                 </form>
-                <p class="lead"></p><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;">Ut et urna sapien. Nulla lacinia sagittis felis id cursus. Etiam eget lacus quis enim aliquet dignissim. Nulla vel elit ultrices, venenatis quam sed, rutrum magna. Pellentesque ultricies non lorem hendrerit vestibulum. Maecenas lacinia pharetra nisi, at pharetra nunc placerat nec. Maecenas luctus dolor in leo malesuada, vel aliquet metus sollicitudin. Curabitur sed pellentesque sem, in tincidunt mi. Aliquam sodales aliquam felis, eget tristique felis dictum at. Proin leo nisi, malesuada vel ex eu, dictum pellentesque mauris. Quisque sit amet varius augue.</p><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;">Sed quis imperdiet est. Donec lobortis tortor id neque tempus, vel faucibus lorem mollis. Fusce ut sollicitudin risus. Aliquam iaculis tristique nunc vel feugiat. Sed quis nulla non dui ornare porttitor eu vitae nisi. Curabitur at quam ut libero convallis mattis vel eget mauris. Vivamus vitae lectus ligula. Nulla facilisi. Vivamus tristique maximus nulla, vel mollis felis blandit posuere. Curabitur mi risus, rutrum non magna at, molestie gravida magna. Aenean neque sapien, volutpat a ullamcorper nec, iaculis quis est.</p><p></p>
+                <p class="lead"></p><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;"><?php echo $book['description'] ?></p><p></p>
                 
             </div>
         </div>
@@ -55,83 +78,41 @@
     <div class="container px-4 px-lg-5 mt-5">
         <h2 class="fw-bolder mb-4">Related products</h2>
         <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                <div class="card h-100 product-item">
-                    <!-- Product image-->
-                    <img class="card-img-top w-100" src="http://localhost/book_shop/uploads/product_3/english grammar in use.jpg" alt="...">
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">English Grammar in Use</h5>
-                            <!-- Product price-->
-                                                            <span><b>Price: </b>2,500</span>
-                                                        <p class="m-0"><small>By: Raymond Murphy, Surai Pongtongcharoen</small></p>
+            <?php
+                for($i= 0; $i < count($books); $i++){ ?>
+                <div class="col mb-5">
+                    <div class="card h-100 product-item">
+                        <!-- Product image-->
+                        <img class="card-img-top w-100" src="<?php echo $books[$i]->coverImage ?>" alt="...">
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder"><?php echo $books[$i]->title ?></h5>
+                                <!-- Product price-->
+                                                                <span><b>Price: </b><?php echo $books[$i]->price ?></span>
+                                                            <p class="m-0"><small>By: <?php echo $books[$i]->author ?></small></p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-flat btn-primary " href=".?p=view_product&amp;id=eccbc87e4b5ce2fe28308fd9f2a7baf3">View</a>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-flat btn-primary " href="view-product.php?book_number=<?php echo $books[$i]->book_number ?>">View</a>
+                            </div>
+                            
                         </div>
-                        
                     </div>
                 </div>
-            </div>
-                        <div class="col mb-5">
-                <div class="card h-100 product-item">
-                    <!-- Product image-->
-                    <img class="card-img-top w-100" src="http://localhost/book_shop/uploads/product_2/modern PHP.jpg" alt="...">
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">Modern PHP: New Features and Good Practices</h5>
-                            <!-- Product price-->
-                                                            <span><b>Price: </b>3,500</span>
-                                                        <p class="m-0"><small>By: Josh Lockhart</small></p>
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-flat btn-primary " href=".?p=view_product&amp;id=c81e728d9d4c2f636f067f89cc14862c">View</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-                        <div class="col mb-5">
-                <div class="card h-100 product-item">
-                    <!-- Product image-->
-                    <img class="card-img-top w-100" src="http://localhost/book_shop/uploads/product_1/modern PHP.jpg" alt="...">
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">The Joy of PHP: A Beginner's Guide to Programming</h5>
-                            <!-- Product price-->
-                                                            <span><b>Price: </b>2,500</span>
-                                                        <p class="m-0"><small>By: Alan Forbes</small></p>
-                        </div>
-                    </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-flat btn-primary " href=".?p=view_product&amp;id=c4ca4238a0b923820dcc509a6f75849b">View</a>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-                    </div>
+                <?php   }?>
+            
+                
     </div>
 </section>
 
 <!-- Footer-->
 <footer class="py-4 bg-dark">
             <div class="container">
-              <p class="m-0 text-center text-white">Copyright © Books 2021</p>
+              <p class="m-0 text-center text-white">Copyright © Books 2022</p>
               <p class="m-0 text-center text-white">Developed By: <a href="#">krenarajdini</a></p>
           </div>
         </footer>

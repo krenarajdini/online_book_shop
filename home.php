@@ -43,6 +43,13 @@ include_once "navbar.php";
 
 <?php  
     $books = [];
+    $products_page = 8;
+    $page = 1;
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    }
+    $start = ($page - 1) * $products_page;
+
 
 
     if(isset($_GET['category'])){
@@ -138,7 +145,7 @@ include_once "navbar.php";
     }else if(!isset($_POST["book-title"]) && !isset($_GET['category'])){
 
         $books = [];
-        $book_search = "SELECT * FROM books";
+        $book_search = "SELECT * FROM books Limit $start, $products_page";
         $res = mysqli_query($con, $book_search);
         $totalNumberOfBooks = mysqli_num_rows($res);
          if ($totalNumberOfBooks > 0) {
@@ -166,7 +173,7 @@ include_once "navbar.php";
                         </div>
                     </div>
                 </header>
-          
+                <h2 class="fw-bolder mb-4">Related products</h2>
             <div class="row gx-4 gx-lg-6 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
                         for($i= 0; $i < count($books); $i++){ ?>
@@ -188,7 +195,7 @@ include_once "navbar.php";
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-flat btn-primary" href="view-product.php">View</a>
+                                    <a class="btn btn-flat btn-primary" href="view-product.php?book_number=<?php echo $books[$i]->book_number ?>">View</a>
                                 </div>
 
                             </div>
@@ -197,12 +204,22 @@ include_once "navbar.php";
                 
                 <?php   }?>
             </div>
-
+            <nav aria-label="Page navigation example bg-light ">
+                <ul class="pagination bg-light d-flex justify-content-center">
+                    <li class="page-item"><a class="page-link" href="home.php?page=<?php echo $page > 1? $page-1 : $page?>">Previous</a></li>
+                    <?php for($i =0; $i < $totalNumberOfBooks/$products_page + 1; $i++){ ?>
+                    <li class="page-item <?php echo $page==$i +1 ? "active":""; ?>"><a class="page-link" href="">
+                        <?php echo $i+1; ?>
+                    </a></li>
+                    <?php } ?>
+                    <li class="page-item"><a class="page-link" href="home.php?page=<?php echo $page < $totalNumberOfBooks/$products_page+1? $page+1 : $page?>">Next</a></li>
+                </ul>
+            </nav>
 
 <!-- Footer-->
         <footer class="py-4 bg-dark">
             <div class="container">
-              <p class="m-0 text-center text-white">Copyright © Books 2021</p>
+              <p class="m-0 text-center text-white">Copyright © Books 2022</p>
               <p class="m-0 text-center text-white">Developed By: <a href="#">krenarajdini</a></p>
           </div>
         </footer>
