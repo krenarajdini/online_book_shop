@@ -180,14 +180,14 @@ include_once "navbar.php";
                 <?php
                     if(isset($_POST["book-title"])){
                         if(count($books) == 0){
-                            echo "<h3 class='text-center m-5'>No books found for: ". $_POST["book-title"] ."</h3>";
+                            echo "<h3 class='text-center m-5'>No books found for: '". $_POST["book-title"] ."'</h3>";
                         }
                     }
 
                     if(isset($_POST['title'])|| isset($_POST['author']) || isset($_POST['description']) 
                         || isset($_POST['year']) || isset($_POST['price']) ){
                         if(count($books) == 0){
-                            echo "<h3 class='text-center m-5'>No books found for advanced search</h3>";
+                            echo "<h3 class='text-center m-5'>No books found for 'advanced search' </h3>";
                         }
                     }
                     
