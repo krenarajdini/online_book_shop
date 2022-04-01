@@ -50,6 +50,7 @@ include_once "navbar.php";
         $page = $_GET['page'];
     }
     $start = ($page - 1) * $products_page;
+    $totalNumberOfBooks;
 
 
 
@@ -59,11 +60,14 @@ include_once "navbar.php";
         $res = mysqli_query($con, $category_search);
         $category_id = mysqli_fetch_assoc($res)['category_id'];
 
-        
         $book_search = "SELECT * FROM books where category_id = '$category_id'";
         $res = mysqli_query($con, $book_search);
         $totalNumberOfBooks = mysqli_num_rows($res);
-         if ($totalNumberOfBooks > 0) {
+        
+        $book_search = "SELECT * FROM books where category_id = '$category_id' Limit $start, $products_page";
+        $res = mysqli_query($con, $book_search);
+        $totalNumberOfBooksForCategory = mysqli_num_rows($res);
+         if ($totalNumberOfBooksForCategory  > 0) {
             $index = 0;
             while ($row = mysqli_fetch_assoc($res)) {
                 $books[$index] = (object) ['author' => $row['author'], 'title' => $row['title'], 
@@ -80,7 +84,7 @@ include_once "navbar.php";
         if(isset($_POST['book-title'])){
 
             $book_name = $_POST['book-title'];
-            $book_search = "SELECT * FROM books WHERE title LIKE '%$book_name%'";
+            $book_search = "SELECT * FROM books WHERE title LIKE '%$book_name%' Limit $start, $products_page";
             $res = mysqli_query($con, $book_search);
             $totalNumberOfBooks = mysqli_num_rows($res);
             if ($totalNumberOfBooks > 0) {
@@ -132,6 +136,7 @@ include_once "navbar.php";
                 $price_min = $_POST['price-min'];
                 $book_search .= $and . " price >= '$price_min' ";
             }
+            $book_search .= " Limit $start, $products_page";
             $res = mysqli_query($con, $book_search);
             $totalNumberOfBooks = mysqli_num_rows($res);
             if ($totalNumberOfBooks > 0) {
@@ -145,7 +150,6 @@ include_once "navbar.php";
         }//Default page
     }else if(!isset($_POST["book-title"]) && !isset($_GET['category'])){
 
-        $books = [];
         $book_search = "SELECT * FROM books";
         $res = mysqli_query($con, $book_search);
         $totalNumberOfBooks = mysqli_num_rows($res);
@@ -213,9 +217,8 @@ include_once "navbar.php";
                             <div class="card-footer  pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <a class="btn btn-flat btn-primary" href="view-product.php?book_number=<?php echo $books[$i]->book_number ?>">View</a>
-                                    <br>
-
-                                    <button type="button" class="btn btn-link"><img src="img\icons8-cart-64.png" width="25" height="25"></button>
+                            
+                                    <a type="button" class="btn btn-outline-primary"><img src="img\icons8-cart-64.png" width="25" height="25"></a>
                                     
                                 </div>
 
@@ -228,14 +231,17 @@ include_once "navbar.php";
             <?php if($totalNumberOfBooks > 0){?>
             <nav aria-label="Page navigation example bg-light ">
                 <ul class="pagination bg-light d-flex justify-content-center">
-                    <li class="page-item"><a class="page-link" href="home.php?page=<?php echo $page > 1? $page-1 : $page?>">Previous</a></li>
+                    <li class="page-item"><a class="page-link"
+                         href="home.php?<?php echo (empty($category)? "" : "category=".$category."&") ;?>page=<?php echo $page > 1? $page-1 : $page?>">Previous</a></li>
                     <?php for($i =0; $i < $totalNumberOfBooks/$products_page; $i++){ ?>
-                    <li class="page-item <?php echo $page==$i +1 ? "active":""; ?>"><a class="page-link" href="home.php?page=<?php echo $i+1; ?>">
+                    <li class="page-item <?php echo $page==$i +1 ? "active":""; ?>"><a class="page-link" 
+                        href="home.php?<?php echo (empty($category)? "" : "category=".$category."&") ;?>page=<?php echo $i+1; ?>">
                         <?php echo $i+1; ?>
                     </a></li>
                     
                     <?php } ?>
-                    <li class="page-item"><a class="page-link" href="home.php?page=<?php echo $page < $totalNumberOfBooks/$products_page? $page+1 : $page?>">Next</a></li>
+                    <li class="page-item"><a class="page-link" 
+                        href="home.php?<?php echo (empty($category)? "" : "category=".$category."&") ;?>page=<?php echo $page < $totalNumberOfBooks/$products_page? $page+1 : $page?>">Next</a></li>
                 </ul>
             </nav>
             <?php }?>

@@ -41,6 +41,17 @@
         
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
+                    <div class="rating">
+                        <div id="rating-image-b" class="avg-rating-3-75"></div>
+                            3.66 avg rating and review
+                            <span class="book-rating-separator">•</span>
+                            <div class="book-rating-provider">
+                            <span class="book-rating-enclosure">(</span>
+                            20,761 ratings by
+                            <a href="#" target="_blank">Readers</a>
+                            <span class="book-rating-enclosure">)</span>
+                        </div>
+                    </div>
                 <img class="card-img-top mb-5 mb-md-0 " loading="lazy" id="display-img" src="<?php echo $book['cover_image']?>" width="250" height="500" alt="...">
                 <div class="mt-2 row gx-2 gx-lg-3 row-cols-4 row-cols-md-3 row-cols-xl-4 justify-content-start">
                     <div class="col">
