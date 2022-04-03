@@ -19,16 +19,7 @@ button a {
 button a:hover {
   text-decoration: none;
 }
-h1 {
-  position: absolute;
-  top: 50%;
-  left: 75%;
-  width: 100%;
-  text-align: center;
-  transform: translate(-50%, -50%);
-  font-size: 15px;
-  font-weight: 600;
-}
+
 .username {
   width: fit-content;
   font-size: 15px !important;
@@ -97,7 +88,6 @@ input[type="text"]:focus {
 
 #list {
   font-size: 1.5em;
-  margin-left: 90px;
 }
 .category-bar {
   display: flex;
@@ -128,5 +118,5 @@ input[type="text"]:focus {
   width: auto;
 }
 .username {
-  margin-left: 345px;
+  margin-left: 300px;
 }

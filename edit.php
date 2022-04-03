@@ -58,7 +58,7 @@ include_once("editprocess.php");
             <div class="card-body">
                 <div class="w-100 justify-content-between d-flex">
                     <h4><b>Update Account Details</b></h4>
-                    <a href="./order-cart.php" class="btn btn btn-dark btn-flat"><div class="fa fa-angle-left"></div> Back to Order List</a>
+                    <a href="./orders.php" class="btn btn btn-dark btn-flat"><div class="fa fa-angle-left"></div> Back to Order List</a>
                 </div>
                     <hr class="border-warning">
                     <div class="col-md-6">

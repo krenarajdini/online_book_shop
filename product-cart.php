@@ -31,7 +31,32 @@
   <body style="height: auto;">
   <?php 
      session_start();
-     include_once("navbar.php"); ?>
+     include_once("navbar.php"); 
+     include_once("connection.php"); 
+
+     if(isset($_POST['add_to_cart'])){
+         $book_number = $_POST['add_to_cart'];
+         if(isset($_SESSION['mycart'][$book_number])){
+            $amount = $_SESSION['mycart'] [$book_number]['amount'];
+            $_SESSION['mycart'][$book_number]['amount'] = $amount + 1;
+         }
+         else{
+            $_SESSION['mycart'][$book_number]['amount'] = 1;
+         }
+         header('Location: home.php');
+     }
+     $books = [];
+     $total_price = 0;      
+     foreach ( $_SESSION['mycart'] as $key => $value) {
+        $search_book = "SELECT * FROM books WHERE book_number = '$key'";
+        $result = mysqli_query($con, $search_book);
+        $row = mysqli_fetch_assoc($result);
+        $books[$key] = $row;
+        $total_price += $row['price'] * $value['amount'];
+     }    
+                    
+
+     ?>
 <section class="py-5 mt-5">
     <div class="container">
         <div class="row">
@@ -43,20 +68,21 @@
             <div class="card-body">
                 <h3><b>Cart List</b></h3>
                 <hr class="border-dark">
-                                    <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
+                   <?php foreach ( $_SESSION['mycart'] as $key => $value) {?>
+                      <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
                         <div class="d-flex align-items-center col-8">
                             <span class="mr-2"><a href="" class="btn btn-sm btn-outline-danger rem_item" data-id="9"><i class="fa fa-trash"></i></a></span>
-                            <img src="http://localhost/book_shop/uploads/product_3/english grammar in use.jpg" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" width="150" height="150" alt="">
+                            <img src="<?php echo $books[$key]['cover_image']?>" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" width="150" height="150" alt="">
                             <div>
-                                <p class="mb-1 mb-sm-1">English Grammar in Use</p>
+                                <p class="mb-1 mb-sm-1"><?php echo $books[$key]['title']?></p>
                                 
-                                <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price">2,500</span></small></p>
+                                <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price"><?php echo $books[$key]['price']?></span></small></p>
                                 <div>
                                 <div class="input-group" style="width:130px !important">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-sm btn-outline-secondary min-qty" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
                                     </div>
-                                    <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="1" aria-describedby="button-addon1" data-id="9" readonly="">
+                                    <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="<?php echo $value['amount']?>" aria-describedby="button-addon1" data-id="9" readonly="">
                                     <div class="input-group-append">
                                         <button class="btn btn-sm btn-outline-secondary plus-qty" type="button" id="button-addon1"><i class="fa fa-plus"></i></button>
                                     </div>
@@ -65,12 +91,13 @@
                             </div>
                         </div>
                         <div class="col text-right align-items-center d-flex justify-content-end">
-                            <h4><b class="total-amount">2,500</b></h4>
+                            <h4><b class="total-amount"><?php echo $books[$key]['price'] * $value['amount']?></b></h4>
                         </div>
                     </div>
+                     <?php } ?>
                                 <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
                     <div class="col-8 d-flex justify-content-end"><h4>Grand Total:</h4></div>
-                    <div class="col d-flex justify-content-end"><h4 id="grand-total">2,500</h4></div>
+                    <div class="col d-flex justify-content-end"><h4 id="grand-total"><?php echo $total_price?></h4></div>
                 </div>
             </div>
         </div>

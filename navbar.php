@@ -43,10 +43,24 @@
             
                     <img src="img\icon-user-preview.png" width="30" height="30" alt="" loading="lazy">
                     Welcome <?php echo ucwords($_SESSION['name']) ?>
-                    <button type="button" class="btn btn-light mx-1">
-                    <a href="product-cart.php">Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-count">0</span><img src="img\shop.png" alt="cart" width="25px" height="25px"></a></button>
+                    <button type="button" class="btn btn-light">
+                        <a href="product-cart.php">Cart 
+                            <span class="badge bg-dark text-white rounded-pill" id="cart-count">
+                            <?php 
+                                if(isset($_SESSION['mycart'])){
+                                    echo count($_SESSION['mycart']);
+                                }else{
+                                    echo 0;
+                                }
+
+
+                            ?>
+                            </span>
+                            <img src="img\shop.png" alt="cart" width="25px" height="25px">
+                        </a>
+                    </button>
                     
-                    <button type="button" class="btn btn-light mx-1"><a href="order-cart.php">Account  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
+                    <button type="button" class="btn btn-light mx-1"><a href="orders.php">Account  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
                     <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout  <img src="img\logout_icon.png" alt="cart" width="25px" height="25px"></a></button>
                 </div>
                 
