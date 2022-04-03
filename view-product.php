@@ -67,16 +67,14 @@
                     <span id="price">Price: <?php echo $book['price'] ?></span>
                     <br>
                 </div>
-                <form action="" id="add-cart">
-                <div class="d-flex">
-                    <input type="hidden" name="price" value="1999.99">
-                    <input type="hidden" name="inventory_id" value="4">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" name="quantity">
-                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
-                    </button>
-                </div>
+                <form action="product-cart.php" method="POST">
+                    <div class="d-flex">
+                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                        <input type="hidden" name="add_to_cart" value="<?php echo $book_number;?>">
+                    </div>
                 </form>
                 <p class="lead"></p><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;"><?php echo $book['description'] ?></p><p></p>
                 

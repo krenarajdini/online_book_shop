@@ -73,7 +73,8 @@
          else{
             $_SESSION['mycart'][$book_number]['amount'] = 1;
          }
-         header('Location: home.php');
+        //  header('Location: home.php');
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
      }
      $books = [];
      $total_price = 0;      
