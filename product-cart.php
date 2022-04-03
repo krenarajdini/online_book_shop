@@ -32,8 +32,38 @@
   <?php 
      session_start();
      include_once("navbar.php"); 
-     include_once("connection.php"); 
+     include_once("connection.php");
+     
 
+     //Delete cart
+     if(isset($_POST['empty_cart'])){
+       $_SESSION['mycart'] = array();
+     }
+
+     //Delete product from cart
+    if(isset($_POST['delete_product'])){
+        $product_id = $_POST['delete_product'];
+        unset($_SESSION['mycart'][$product_id]);
+        header('Location: product-cart.php');
+    }
+
+    //Add amount
+    if(isset($_POST['add_amount'])){
+        $product_id = $_POST['add_amount'];
+        $_SESSION['mycart'][$product_id]['amount']++;
+        
+    }
+    //Subtract amount
+    if(isset($_POST['sub_amount'])){
+        $product_id = $_POST['sub_amount'];
+        $_SESSION['mycart'][$product_id]['amount']--;
+        if($_SESSION['mycart'][$product_id]['amount'] == 0){
+            unset($_SESSION['mycart'][$product_id]);
+            header('Location: product-cart.php');
+        }
+    }
+
+     //Add to cart
      if(isset($_POST['add_to_cart'])){
          $book_number = $_POST['add_to_cart'];
          if(isset($_SESSION['mycart'][$book_number])){
@@ -61,7 +91,9 @@
     <div class="container">
         <div class="row">
             <div class="col d-flex justify-content-end mb-2">
-                <button class="btn btn-outline-dark btn-flat btn-sm" type="button" id="empty_cart">Empty Cart</button>
+                <form action="product-cart.php" method="POST">
+                    <input class="btn btn-outline-dark btn-flat btn-sm" type="submit" value="Empty Cart" name="empty_cart"/>
+                </form>
             </div>
         </div>
         <div class="card rounded-0">
@@ -71,7 +103,11 @@
                    <?php foreach ( $_SESSION['mycart'] as $key => $value) {?>
                       <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
                         <div class="d-flex align-items-center col-8">
-                            <span class="mr-2"><a href="" class="btn btn-sm btn-outline-danger rem_item" data-id="9"><i class="fa fa-trash"></i></a></span>
+                            
+                            <form action="product-cart.php" method= "POST" > 
+                                <button type="submit" class="btn btn-sm mr-2 btn-outline-danger rem_item" ><i class="fa fa-trash"></i></button>
+                                <input type="hidden" name="delete_product" value="<?php echo $key; ?>"/>
+                            </form>
                             <img src="<?php echo $books[$key]['cover_image']?>" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" width="150" height="150" alt="">
                             <div>
                                 <p class="mb-1 mb-sm-1"><?php echo $books[$key]['title']?></p>
@@ -79,16 +115,27 @@
                                 <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price"><?php echo $books[$key]['price']?></span></small></p>
                                 <div>
                                 <div class="input-group" style="width:130px !important">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-sm btn-outline-secondary min-qty" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
-                                    </div>
+                                    <form action="product-cart.php" method="post">
+                                        <div class="input-group-prepend">
+                                        
+                                                <button class="btn  btn-outline-secondary min-qty" type="submit"><i class="fa fa-minus"></i></button>
+                                                <input type="hidden" name="sub_amount" value="<?php echo $key; ?>"/>
+                                        
+                                        </div>
+                                    </form>
                                     <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="<?php echo $value['amount']?>" aria-describedby="button-addon1" data-id="9" readonly="">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-sm btn-outline-secondary plus-qty" type="button" id="button-addon1"><i class="fa fa-plus"></i></button>
-                                    </div>
+                                    <form action="product-cart.php" method="post">
+                                        <div class="input-group-prepend">
+                                        
+                                                <button class="btn  btn-outline-secondary min-qty" type="submit" ><i class="fa fa-plus"></i></button>
+                                                <input type="hidden" name="add_amount" value="<?php echo $key; ?>"/>
+                                        
+                                        </div>
+                                    </form>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="col text-right align-items-center d-flex justify-content-end">
                             <h4><b class="total-amount"><?php echo $books[$key]['price'] * $value['amount']?></b></h4>
