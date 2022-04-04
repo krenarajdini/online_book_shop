@@ -161,6 +161,8 @@ if(isset($_POST['signup'])){
                   $_SESSION['password'] = $password;
                   $_SESSION['name'] = $fetch['name'];
                   $_SESSION['mycart'] = array();
+                  $_SESSION['currency'] = "USD";
+                  $_SESSION['rate'] = 1;
                   header('location: home.php');
                 }else{
                     $info = "It looks like you haven't still verify your email - $email";

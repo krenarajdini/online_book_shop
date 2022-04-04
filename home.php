@@ -1,26 +1,31 @@
 <?php require_once "controllerUserData.php";?>
 <?php
-$email = $_SESSION['email'];
-$password = $_SESSION['password'];
-if ($email != false && $password != false) {
-    $sql = "SELECT * FROM user WHERE email = '$email'";
-    $run_Sql = mysqli_query($con, $sql);
-    if ($run_Sql) {
-        $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $name = $fetch_info['name'];
-        $status = $fetch_info['status'];
-        $code = $fetch_info['code'];
-        if ($status == "verified") {
-            if ($code != 0) {
-                header('Location: reset-code.php');
+    $email = $_SESSION['email'];
+    $password = $_SESSION['password'];
+    if ($email != false && $password != false) {
+        $sql = "SELECT * FROM user WHERE email = '$email'";
+        $run_Sql = mysqli_query($con, $sql);
+        if ($run_Sql) {
+            $fetch_info = mysqli_fetch_assoc($run_Sql);
+            $name = $fetch_info['name'];
+            $status = $fetch_info['status'];
+            $code = $fetch_info['code'];
+            if ($status == "verified") {
+                if ($code != 0) {
+                    header('Location: reset-code.php');
+                }
+            } else {
+                header('Location: user-otp.php');
             }
-        } else {
-            header('Location: user-otp.php');
         }
+    } else {
+        header('Location: login-user.php');
     }
-} else {
-    header('Location: login-user.php');
-}
+    if(isset($_POST['currency'])){
+        $_SESSION['currency'] =  $_POST['currency'];
+        $_SESSION['rate'] = $_POST['rate'];
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -208,7 +213,7 @@ include_once "navbar.php";
                                     <!-- Product name-->
                                     <h5 class="fw-bolder"> <?php echo $books[$i]->title ?> </h5>
                                     <!-- Product price-->
-                                    <span><b>Price: </b><?php echo $books[$i]->price ?></span>
+                                    <span><b>Price: </b><strong><?php echo $books[$i]->price * $_SESSION['rate'] ."</strong> ". $_SESSION['currency'] ?> </span>
                                 </div>
                                 <p class="m-0"><small><?php echo $books[$i]->author ?></small></p>
                                 <p class="m-0"><small>ISBN: <?php echo $books[$i]->book_number ?></small></p>

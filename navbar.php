@@ -20,7 +20,7 @@
     }
     
 </style>
-
+<?php echo  basename($_SERVER['REQUEST_URI']);?>
 
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
         
@@ -40,9 +40,19 @@
                 </div>
                 
                 <div class="input-group  username" >
-            
-                    <img src="img\icon-user-preview.png" width="30" height="30" alt="" loading="lazy">
-                    Welcome <?php echo ucwords($_SESSION['name']) ?>
+
+                    <form action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
+                        <button class="btn <?php echo $_SESSION['currency']=="USD"? "active":"";?> btn-outline-light mx-1" type="submit"><i class="fa fa-dollar"></i></button>
+                        <input type="hidden" name="currency" value="USD">
+                        <input type="hidden" name="rate" value="1">
+
+                    </form>
+                    <form action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
+                        <button class="btn <?php echo $_SESSION['currency']=="SAR"? "active":"";?> btn-outline-light mx-1" type="submit"><i class="fa fa-bitcoin"></i></button>
+                        <input type="hidden" name="currency" value="SAR">
+                        <input type="hidden" name="rate" value="4">
+
+                    </form>
                     <button type="button" class="btn btn-light">
                         <a href="product-cart.php">Cart 
                             <span class="badge bg-dark text-white rounded-pill" id="cart-count">
@@ -60,7 +70,7 @@
                         </a>
                     </button>
                     
-                    <button type="button" class="btn btn-light mx-1"><a href="orders.php">Account  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
+                    <button type="button" class="btn btn-light mx-1"><a href="orders.php"> <?php echo ucwords($_SESSION['name']) ?>  <img src="img\user_icon.png" alt="cart" width="25px" height="25px"></a></button>
                     <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout  <img src="img\logout_icon.png" alt="cart" width="25px" height="25px"></a></button>
                 </div>
                 
