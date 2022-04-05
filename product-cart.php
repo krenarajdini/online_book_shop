@@ -113,7 +113,7 @@
                             <div>
                                 <p class="mb-1 mb-sm-1"><?php echo $books[$key]['title']?></p>
                                 
-                                <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price"><?php echo $books[$key]['price']?></span></small></p>
+                                <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price"><?php echo $books[$key]['price'] * $_SESSION['rate'] .' '. $_SESSION['currency']?></span></small></p>
                                 <div>
                                 <div class="input-group" style="width:130px !important">
                                     <form action="product-cart.php" method="post">
@@ -139,13 +139,13 @@
                             
                         </div>
                         <div class="col text-right align-items-center d-flex justify-content-end">
-                            <h4><b class="total-amount"><?php echo $books[$key]['price'] * $value['amount']?></b></h4>
+                            <h4><b class="total-amount"><?php echo $books[$key]['price'] * $value['amount'] * $_SESSION['rate'] .' '. $_SESSION['currency']?></b></h4>
                         </div>
                     </div>
                      <?php } ?>
                                 <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
                     <div class="col-8 d-flex justify-content-end"><h4>Grand Total:</h4></div>
-                    <div class="col d-flex justify-content-end"><h4 id="grand-total"><?php echo $total_price?></h4></div>
+                    <div class="col d-flex justify-content-end"><h4 id="grand-total"><?php echo $total_price * $_SESSION['rate'] .' '. $_SESSION['currency']?></h4></div>
                 </div>
             </div>
         </div>

@@ -20,7 +20,9 @@
     }
     
 </style>
-<?php echo  basename($_SERVER['REQUEST_URI']);?>
+<?php echo  basename($_SERVER['REQUEST_URI']); 
+ob_start();
+?>
 
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
         
@@ -39,14 +41,16 @@
                    <a href="search-advanced.php" class="input-group-text btn ">Advanced Search</a>
                 </div>
                 
+        </form>    
+                
                 <div class="input-group  username" >
 
                     <form action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
                         <button class="btn <?php echo $_SESSION['currency']=="USD"? "active":"";?> btn-outline-light mx-1" type="submit"><i class="fa fa-dollar"></i></button>
                         <input type="hidden" name="currency" value="USD">
                         <input type="hidden" name="rate" value="1">
-
                     </form>
+
                     <form action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
                         <button class="btn <?php echo $_SESSION['currency']=="SAR"? "active":"";?> btn-outline-light mx-1" type="submit"><i class="fa fa-bitcoin"></i></button>
                         <input type="hidden" name="currency" value="SAR">
@@ -62,8 +66,6 @@
                                 }else{
                                     echo 0;
                                 }
-
-
                             ?>
                             </span>
                             <img src="img\shop.png" alt="cart" width="25px" height="25px">
@@ -74,7 +76,6 @@
                     <button type="button" class="btn btn-light mx-1"><a href="login-user.php">Logout  <img src="img\logout_icon.png" alt="cart" width="25px" height="25px"></a></button>
                 </div>
                 
-        </form>    
         
 </nav>
 
