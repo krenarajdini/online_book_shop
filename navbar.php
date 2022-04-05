@@ -20,9 +20,20 @@
     }
     
 </style>
-<?php echo  basename($_SERVER['REQUEST_URI']); 
-ob_start();
-?>
+<?php 
+
+    if(isset($_POST['currency'])){
+        $_SESSION['currency'] = $_POST['currency'];
+        $_SESSION['rate'] = $_POST['rate'];
+       
+    }
+    else{
+        $_SESSION['currency'] = "USD";
+        $_SESSION['rate'] = 1;
+    }
+
+echo basename($_SERVER['REQUEST_URI']);
+ob_start();?>
 
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
         
