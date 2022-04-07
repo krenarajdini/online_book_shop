@@ -89,7 +89,7 @@ include_once "navbar.php";
         if(isset($_POST['book-title'])){
 
             $book_name = $_POST['book-title'];
-            $book_search = "SELECT * FROM books WHERE title LIKE '%$book_name%' Limit $start, $products_page";
+            $book_search = "SELECT * FROM books WHERE title LIKE '%$book_name%' OR description LIKE '%$book_name%'  Limit $start, $products_page";
             $res = mysqli_query($con, $book_search);
             $totalNumberOfBooks = mysqli_num_rows($res);
             if ($totalNumberOfBooks > 0) {
