@@ -64,7 +64,7 @@
                 <div class="small mb-1">SKU: <?php echo $book['book_number'] ?></div>
                 <p class="m-0"><small>Author: <?php echo $book['author'] ?></small></p>
                 <div class="fs-5 mb-5">
-                    <span id="price">Price: <?php echo $book['price'] ?></span>
+                    <span id="price">Price: <?php echo $book['price'] * $_SESSION['rate'] .' '. $_SESSION['currency']  ?></span>
                     <br>
                 </div>
                 <form action="product-cart.php" method="POST">
@@ -74,6 +74,8 @@
                             Add to cart
                         </button>
                         <input type="hidden" name="add_to_cart" value="<?php echo $book_number;?>">
+                        <input type="hidden" name = "price" value= <?php echo $book['price']?> >
+
                     </div>
                 </form>
                 <p class="lead"></p><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;"><?php echo $book['description'] ?></p><p></p>
@@ -99,7 +101,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder"><?php echo $books[$i]->title ?></h5>
                                 <!-- Product price-->
-                                                                <span><b>Price: </b><?php echo $books[$i]->price ?></span>
+                                                                <span><b>Price: </b><?php echo $books[$i]->price * $_SESSION['rate'] .' '. $_SESSION['currency'] ?></span>
                                                             <p class="m-0"><small>By: <?php echo $books[$i]->author ?></small></p>
                             </div>
                         </div>
