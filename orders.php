@@ -12,8 +12,30 @@
     </head>
      <body style="height: auto;">
      <?php 
-     session_start();
-     include_once("navbar.php"); ?>
+        session_start();
+        include_once("navbar.php");
+        include_once("connection.php");
+
+        //Checkout
+        if(isset($_POST['checkout'])){
+            $total = 0;
+            foreach($_SESSION['mycart'] as $product_id => $product){
+                $total += $product['price'] * $product['amount'];
+            }
+            $sql = "INSERT INTO orders (FK_u_id, total) VALUES ('".$_SESSION['user_id']."', '".$total."')";
+            $result = mysqli_query($con, $sql);
+            $order_id = mysqli_insert_id($con);
+            foreach($_SESSION['mycart'] as $product_id => $product){
+                $sql = "INSERT INTO buys (order_id, product_id, amount) VALUES ('".$order_id."', '".$product_id."', '".$product['amount']."')";
+                $result = mysqli_query($con, $sql);
+            }
+            $_SESSION['mycart'] = array();  
+        }
+     
+     
+     
+     
+     ?>
         <section class="py-5 mt-5">
             <div class="container">
                 <div class="card rounded-0">

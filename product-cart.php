@@ -60,6 +60,7 @@
         if($_SESSION['mycart'][$product_id]['amount'] == 0){
             unset($_SESSION['mycart'][$product_id]);
             header('Location: product-cart.php');
+
         }
     }
 
@@ -75,6 +76,7 @@
          }
         //  header('Location: home.php');
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+
      }
      $books = [];
      $total_price = 0;      
@@ -150,7 +152,10 @@
             </div>
         </div>
         <div class="d-flex w-100 justify-content-end">
-            <a href="checkout.php" class="btn btn-sm btn-flat btn-dark">Checkout</a>
+            <form action="orders.php" method="POST">
+                <input type="submit" class="btn btn-sm btn-flat btn-dark" value="Checkout">
+                <input type="hidden" name="checkout">      
+            </form>
         </div>
     </div>
 </section>

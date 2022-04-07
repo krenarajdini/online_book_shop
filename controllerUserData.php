@@ -158,6 +158,7 @@ if(isset($_POST['signup'])){
                 $status = $fetch['status'];
                 if($status == 'verified'){
                   $_SESSION['email'] = $email;
+                  $_SESSION['user_id'] = $fetch['u_id'];
                   $_SESSION['password'] = $password;
                   $_SESSION['name'] = $fetch['name'];
                   $_SESSION['mycart'] = array();
