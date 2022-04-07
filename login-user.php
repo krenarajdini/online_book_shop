@@ -1,11 +1,11 @@
-<?php require_once "controllerUserData.php"; ?>
+<?php require_once "controllerUserData.php";?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/signup-user.css">
 </head>
 <body>
     <div class="container">
@@ -15,30 +15,33 @@
                     <h2 class="text-center">Login</h2>
                     <p class="text-center"><small>Please enter your email and password to access your account..</small></p>
                     <?php
-                    if(count($errors) > 0){
-                        ?>
+if (count($errors) > 0) {
+    ?>
                         <div class="alert alert-danger text-center">
                             <?php
-                            foreach($errors as $showerror){
-                                echo $showerror;
-                            }
-                            ?>
+foreach ($errors as $showerror) {
+        echo $showerror;
+    }
+    ?>
                         </div>
                         <?php
-                    }
-                    ?>
+}
+?>
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label>
+                        <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Email</strong></label></div>
+                        <input id="email" class="form-control" type="email" name="email"
+                        placeholder="email@example.com" required value="<?php echo $email ?> "minlength="8">
                     </div>
-                        <input class="form-control" type="email" name="email" placeholder="email@example.com" required value="<?php echo $email ?>">
-                    </div>
+                    <p id="email-error"></p>
+
                     <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" id="inputGroup-sizing-sm"><strong>Password</strong></label>
                     </div>
-                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        <input class="form-control" id="password1" type="password" name="password" placeholder="Password" required>
                     </div>
+                    <p id="pass-error-message"></p>
                     <!-- <div><input type="checkbox" name="rememberme" value="1" />&nbsp;Remember Me</div> -->
                     <div class="table">
                         <input class="form-control button" type="submit" name="login" value="Login">
@@ -50,6 +53,6 @@
             </div>
         </div>
     </div>
-    
+    <script src="js/login-user.js"></script>
 </body>
 </html>

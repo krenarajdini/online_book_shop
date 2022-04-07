@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+nav {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
+
+  background: #6665ee;
+  font-family: "Poppins", sans-serif;
+}
+nav a.navbar-brand {
+  color: #fff;
+  font-size: 20px !important;
+  font-weight: 500;
+  margin-left: auto;
+}
+button a {
+  color: #6665ee;
+  font-weight: 500;
+}
+button a:hover {
+  text-decoration: none;
+}
+
+.username {
+  width: fit-content;
+  font-size: 15px !important;
+  margin: 0px 0px 0px 0px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  float: right;
+}
+
+li a,
+.dropbtn {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0);
+  text-align: center;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+a.nav-link,
+a.dropbtn {
+  color: black;
+}
+
+input[type="text"] {
+  width: 30%;
+  -webkit-transition: width 0.15s ease-in-out;
+  transition: width 0.15s ease-in-out;
+}
+
+/* When the input field gets focus,
+     change its width to 100% */
+input[type="text"]:focus {
+  width: 70%;
+}
+
+#list {
+  font-size: 1.5em;
+}
+.category-bar {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.active-category {
+  background-color: rgb(224, 224, 0);
+}
+.search-icon {
+  width: 15px;
+}
+.search-btn {
+  padding: 0.4em;
+  border: 0;
+  background-color: #ddd;
+  border-top-left-radius: 0.4em;
+  border-bottom-left-radius: 0.4em;
+  margin-right: 1px;
+}
+.search-btn:focus {
+  outline: none;
+}
+.search-btn:hover {
+  background-color: #428bca;
+}
+.form-inline {
+  width: auto;
+}
+.username {
+  margin-left: 300px;
+}
