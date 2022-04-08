@@ -81,7 +81,7 @@
                                             <td class="sorting_1"><?php echo $i?></td>
                                             <td><?php echo $order['date'].' '.$order['time']?></td>
                                             <td><a href="javascript:void(0)" class="view_order" data-id="8"><?php echo $order['transaction_id'] ?></a></td>
-                                            <td><?php echo $order['total']?> </td>
+                                            <td><?php echo $order['total'] * $_SESSION['rate'] .' '. $_SESSION['currency']?> </td>
                                             <td class="text-center">
                                                                                                     <span class="badge badge-light text-dark">Pending</span>
                                                                                             </td>
