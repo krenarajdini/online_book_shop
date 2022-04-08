@@ -19,19 +19,36 @@
         //Checkout
         if(isset($_POST['checkout'])){
             $total = 0;
-            foreach($_SESSION['mycart'] as $product_id => $product){
-                $total += $product['price'] * $product['amount'];
+            foreach($_SESSION['mycart'] as $book){
+                $total += $book['price'] * $book['amount'];
             }
-            $sql = "INSERT INTO orders (FK_u_id, total) VALUES ('".$_SESSION['user_id']."', '".$total."')";
+            $date = date("Y-m-d");
+            $time = date("H:i:s");
+            $shipment_address = $_SESSION['shipment_address'];
+            //generate random order id with letter and numbers
+            $transaction_id = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+
+            //Insert into database
+            $sql = "INSERT INTO orders(transaction_id, u_id, shipment_address, total, date, time, order_status) 
+            VALUES('$transaction_id', '$_SESSION[user_id]', '$shipment_address', '$total', '$date', '$time', 'Pending')";
+
             $result = mysqli_query($con, $sql);
             $order_id = mysqli_insert_id($con);
-            foreach($_SESSION['mycart'] as $product_id => $product){
-                $sql = "INSERT INTO buys (order_id, product_id, amount) VALUES ('".$order_id."', '".$product_id."', '".$product['amount']."')";
+            foreach($_SESSION['mycart'] as $book){
+                $sql = "INSERT INTO buys (order_id, product_id, amount) VALUES ('".$order_id."', '".$book['book_number']."', '".$book['amount']."')";
                 $result = mysqli_query($con, $sql);
             }
             $_SESSION['mycart'] = array();  
         }
-     
+        //Show orders
+        $sql = "SELECT * FROM orders WHERE u_id = '".$_SESSION['user_id']."'";
+        $result = mysqli_query($con, $sql);
+        $orders = array();
+        while($row = mysqli_fetch_assoc($result)){
+            $orders[] = $row;
+        }
+        $totalOrders = count($orders);
+
      
      
      
@@ -54,28 +71,23 @@
                                     <col width="15">
                                 </colgroup>
                                 <thead>
-                                    <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending" style="width: 116.2px;">#</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="DateTime: activate to sort column ascending" style="width: 176.15px;">DateTime</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Transaction ID: activate to sort column ascending" style="width: 616.425px;">Transaction ID</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 150.9px;">Amount</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Order Status: activate to sort column ascending" style="width: 152.325px;">Order Status</th></tr>
+                                    <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending" style="width: 116.2px;">#</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="DateTime: activate to sort column ascending" style="width: 176.15px;">DateTime</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Transaction ID: activate to sort column ascending" style="width: 616.425px;">Transaction ID</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 150.9px;">Total</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Order Status: activate to sort column ascending" style="width: 152.325px;">Order Status</th></tr>
                                 </thead>
                                 <tbody>
                                                                     
                                                                     
-                                                            <tr class="odd">
-                                            <td class="sorting_1">1</td>
-                                            <td>2022-03-28 02:04</td>
-                                            <td><a href="javascript:void(0)" class="view_order" data-id="8">c9f0f895fb98ab9159f51fd0297e236d</a></td>
-                                            <td>2,500 </td>
+                                    <tr class="odd">
+                                        <?php $i = 0; foreach($orders as $order){ $i++;  ?>
+                                            <td class="sorting_1"><?php echo $i?></td>
+                                            <td><?php echo $order['date'].' '.$order['time']?></td>
+                                            <td><a href="javascript:void(0)" class="view_order" data-id="8"><?php echo $order['transaction_id'] ?></a></td>
+                                            <td><?php echo $order['total'] * $_SESSION['rate'] .' '. $_SESSION['currency']?> </td>
                                             <td class="text-center">
                                                                                                     <span class="badge badge-light text-dark">Pending</span>
                                                                                             </td>
                                             </tr><tr class="even">
-                                            <td class="sorting_1">2</td>
-                                            <td>2022-03-28 01:23</td>
-                                            <td><a href="javascript:void(0)" class="view_order" data-id="7">8f14e45fceea167a5a36dedd4bea2543</a></td>
-                                            <td>0 </td>
-                                            <td class="text-center">
-                                                                                                    <span class="badge badge-light text-dark">Pending</span>
-                                                                                            </td>
-                                            </tr></tbody>
+                                                <?php } ?>
+                                            </tbody>
                                             </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div></div>
                                             <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
                                                 <ul class="pagination"><li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">

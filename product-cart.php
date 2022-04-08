@@ -68,11 +68,13 @@
      if(isset($_POST['add_to_cart'])){
          $book_number = $_POST['add_to_cart'];
          if(isset($_SESSION['mycart'][$book_number])){
-            $amount = $_SESSION['mycart'] [$book_number]['amount'];
+            $amount = $_SESSION['mycart'][$book_number]['amount'];
             $_SESSION['mycart'][$book_number]['amount'] = $amount + 1;
          }
          else{
             $_SESSION['mycart'][$book_number]['amount'] = 1;
+            $_SESSION['mycart'][$book_number]['price'] = $_POST['price'];
+            $_SESSION['mycart'][$book_number]['book_number'] = $book_number;
          }
         //  header('Location: home.php');
         header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -146,7 +148,7 @@
                     </div>
                      <?php } ?>
                                 <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
-                    <div class="col-8 d-flex justify-content-end"><h4>Grand Total:</h4></div>
+                    <div class="col-8 d-flex justify-content-end align-items-center"><h4>Grand Total:</h4> <span>(include tax 10%: <?php echo $total_price * $_SESSION['rate'] * 0.1?>)</span></div>
                     <div class="col d-flex justify-content-end"><h4 id="grand-total"><?php echo $total_price * $_SESSION['rate'] .' '. $_SESSION['currency']?></h4></div>
                 </div>
             </div>

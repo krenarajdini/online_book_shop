@@ -161,6 +161,7 @@ if(isset($_POST['signup'])){
                   $_SESSION['user_id'] = $fetch['u_id'];
                   $_SESSION['password'] = $password;
                   $_SESSION['name'] = $fetch['name'];
+                  $_SESSION['shipment_address'] = $fetch['shipment_address'];
                   $_SESSION['mycart'] = array();
                   $_SESSION['currency'] = "USD";
                   $_SESSION['rate'] = 1;

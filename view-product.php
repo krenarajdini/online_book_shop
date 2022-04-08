@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/view-product.css">
   
 </head>
 <body style="height: auto;">
@@ -14,8 +15,61 @@
      include_once("navbar.php");
      include_once("connection.php");
 
-    $book_number = intval($_GET['book_number']);
-    echo $book_number;
+     //Add Review
+    if (isset($_POST['add_review'])) {
+        $review = $_POST['review'];
+        $rating = $_POST['rating'];
+        $user_id = $_SESSION['user_id'];
+        $book_number = $_POST['book_number'];
+        $date = date("Y-m-d");
+        echo $date;
+        $review_insert = "INSERT INTO reviews (user_id, book_number, review, rating, date) 
+                    VALUES ('$user_id', '$book_number', '$review', '$rating', '$date'  )";
+        $res = mysqli_query($con, $review_insert);
+        
+    }else{
+        $book_number = intval($_GET['book_number']);
+
+    }
+    //Get reviews
+    $review_sql = "SELECT * FROM reviews WHERE book_number = '$book_number'";
+    $review_result = mysqli_query($con, $review_sql);
+    $reviews = array();
+    $stars_count = [0,0,0,0,0];
+    while($row = mysqli_fetch_assoc($review_result)){
+        //Get user name
+        $user_sql = "SELECT * FROM user WHERE u_id = '".$row['user_id']."'";
+        $user_result = mysqli_query($con, $user_sql);
+        $user = mysqli_fetch_assoc($user_result);
+        $row['user_name'] = $user['name'];
+        $reviews[] = $row;
+        $stars_count[$row['rating']-1]++;
+    }
+    if($totalReviews == 0){
+        $totalReviews = 1;
+    }else{
+        $totalReviews = count($reviews);
+    }
+
+    //Calculate stars rating
+    $totalRating = 0;
+    foreach($reviews as $review){
+        $totalRating += $review['rating'];
+    }
+    if($totalReviews > 0){
+        $averageRating = $totalRating/$totalReviews;
+    }else{
+        $averageRating = 0;
+    }
+    $averageRating = round($averageRating, 1);
+    $averageRating = number_format($averageRating, 1);
+    echo $averageRating;
+
+   
+
+
+    //Get book info
+
     $book_search = "SELECT * FROM books WHERE book_number = '$book_number'";
     $res = mysqli_query($con, $book_search);
     $book = mysqli_fetch_assoc($res);
@@ -34,24 +88,15 @@
                 $index++;
             }
         } 
+
+    
    
      ?>
-<section class="py-5">
+<section>
     <div class="container px-4 px-lg-5 my-5">
         
-        <div class="row gx-4 gx-lg-5 align-items-center">
+        <div class="row py-5 align-items-center">
             <div class="col-md-6">
-                    <div class="rating">
-                        <div id="rating-image-b" class="avg-rating-3-75"></div>
-                            3.66 avg rating and review
-                            <span class="book-rating-separator">•</span>
-                            <div class="book-rating-provider">
-                            <span class="book-rating-enclosure">(</span>
-                            20,761 ratings by
-                            <a href="#" target="_blank">Readers</a>
-                            <span class="book-rating-enclosure">)</span>
-                        </div>
-                    </div>
                 <img class="card-img-top mb-5 mb-md-0 " loading="lazy" id="display-img" src="<?php echo $book['cover_image']?>" width="250" height="500" alt="...">
                 <div class="mt-2 row gx-2 gx-lg-3 row-cols-4 row-cols-md-3 row-cols-xl-4 justify-content-start">
                     <div class="col">
@@ -64,7 +109,7 @@
                 <div class="small mb-1">SKU: <?php echo $book['book_number'] ?></div>
                 <p class="m-0"><small>Author: <?php echo $book['author'] ?></small></p>
                 <div class="fs-5 mb-5">
-                    <span id="price">Price: <?php echo $book['price'] ?></span>
+                    <span id="price">Price: <?php echo $book['price'] * $_SESSION['rate'] .' '. $_SESSION['currency']  ?></span>
                     <br>
                 </div>
                 <form action="product-cart.php" method="POST">
@@ -74,6 +119,8 @@
                             Add to cart
                         </button>
                         <input type="hidden" name="add_to_cart" value="<?php echo $book_number;?>">
+                        <input type="hidden" name = "price" value= <?php echo $book['price']?> >
+
                     </div>
                 </form>
                 <p class="lead"></p><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px;"><?php echo $book['description'] ?></p><p></p>
@@ -82,6 +129,150 @@
         </div>
     </div>
 </section>
+<!-- Review and Rating -->
+<div class="container-fluid px-1 mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-10 col-12 text-center mb-5">
+            <div class="card">
+                <div class="row justify-content-left d-flex">
+                    <div class="col-md-4 d-flex flex-column">
+                        <div class="rating-box">
+                            <h1 class="pt-4"><?php echo $averageRating;?></h1>
+                            <p class="">out of 5</p>
+                        </div>
+                        <div> 
+                        <?php for($i = 0; $i < floor($averageRating); $i++){ ?>
+                            <span class="fa fa-star star-active ml-3">
+                            <?php }for($i = 0; $i < 5-floor($averageRating); $i++){ ?>
+                                <span class="fa fa-star star-inactive ml-3">
+                            <?php }?>
+                         </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="rating-bar0 justify-content-center">
+                            <table class="text-left mx-auto">
+                                <tr>
+                                    <td class="rating-label">Excellent</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                        <div class="progress"> 
+                                            <div class="progress-bar bar-1" role="progressbar" style="width: <?php echo $stars_count[4]/$totalReviews * 100 . '%';?>"></div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right"><?php echo $stars_count[4];?></td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Good</td>
+                                    <td class="rating-bar">
+                                    <div class="progress"> 
+                                            <div class="progress-bar bar-1" role="progressbar" style="width: <?php echo $stars_count[3]/$totalReviews * 100 . '%';?>"></div>
+                                    </div>
+                                    </td>
+                                    <td class="text-right"><?php echo $stars_count[3];?></td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Average</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                        <div class="progress"> 
+                                            <div class="progress-bar bar-1" role="progressbar" style="width: <?php echo $stars_count[2]/$totalReviews * 100 . '%';?>"></div>
+                                         </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right"><?php echo $stars_count[2];?></td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Poor</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                        <div class="progress"> 
+                                            <div class="progress-bar bar-1" role="progressbar" style="width: <?php echo $stars_count[1]/$totalReviews * 100 . '%';?>"></div>
+                                         </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right"><?php echo $stars_count[1];?></td>
+                                </tr>
+                                <tr>
+                                    <td class="rating-label">Terrible</td>
+                                    <td class="rating-bar">
+                                        <div class="bar-container">
+                                        <div class="progress"> 
+                                            <div class="progress-bar bar-1" role="progressbar" style="width: <?php echo $stars_count[0]/$totalReviews * 100 . '%';?>"></div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right"><?php echo $stars_count[0];?></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php foreach($reviews as $review){?>
+            <div class="card">
+                <div class="row d-flex">
+                    <div class="d-flex flex-column">
+                        <h3 class="mt-2 mb-0"><?php echo $review['user_name']?></h3>
+                        <div>
+                            <p class="text-left">
+                            <?php for($i = 0; $i < $review['rating']; $i++){ ?>
+                            <span class="fa fa-star star-active ml-3">
+                            <?php }for($i = 0; $i < 5-$review['rating']; $i++){ ?>
+                                <span class="fa fa-star star-inactive ml-3">
+                            <?php }?>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <p class="text-muted pt-5 pt-sm-3"><?php echo $review['date']?></p>
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <p class="content"><?php echo $review['review']?></p>
+                </div>
+               
+            </div>
+            <?php } ?>
+            <div class="card">
+                <div class="row d-flex">
+                    <div class="d-flex flex-column">
+                        <h3 class="mt-2 mb-0"><?php echo $_SESSION['name']?></h3>
+                        
+                    </div>
+                    <div class="ml-auto">
+                        <p class="text-muted pt-5 pt-sm-3"><?php  echo date('d M Y'); ?></p>
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <form class="w-100" action="view-product.php" method="POST">
+                        <div class="form-group">
+                            <label for="formControlTextarea1">Review</label>
+                            <textarea class="form-control" id="formControlTextarea1" rows="5" name="review"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlSelect1">Rating</label>
+                            <select class="form-control" id="formControlSelect1" name="rating">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="book_number" value = "<?php echo $book['book_number']?>">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" name="add_review">Submit</button>
+                        </div>
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Related items section-->
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
@@ -99,7 +290,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder"><?php echo $books[$i]->title ?></h5>
                                 <!-- Product price-->
-                                                                <span><b>Price: </b><?php echo $books[$i]->price ?></span>
+                                                                <span><b>Price: </b><?php echo $books[$i]->price * $_SESSION['rate'] .' '. $_SESSION['currency'] ?></span>
                                                             <p class="m-0"><small>By: <?php echo $books[$i]->author ?></small></p>
                             </div>
                         </div>
