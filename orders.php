@@ -41,13 +41,25 @@
             $_SESSION['mycart'] = array();  
         }
         //Show orders
-        $sql = "SELECT * FROM orders WHERE u_id = '".$_SESSION['user_id']."'";
+        $orders_page = 5;
+        $page = 1;
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        }
+        $start = ($page - 1) * $orders_page;
+        //count the number of orders
+        $sql = "SELECT * FROM orders WHERE u_id = '$_SESSION[user_id]'";
+        $result = mysqli_query($con, $sql);
+        $total_orders = mysqli_num_rows($result);
+        $total_pages = ceil($total_orders / $orders_page);
+
+        $sql = "SELECT * FROM orders WHERE u_id = '$_SESSION[user_id]' ORDER BY order_id ASC LIMIT $start, $orders_page";
         $result = mysqli_query($con, $sql);
         $orders = array();
         while($row = mysqli_fetch_assoc($result)){
             $orders[] = $row;
         }
-        $totalOrders = count($orders);
+
 
      
      
@@ -62,7 +74,10 @@
                             <a href="./edit.php" class="btn btn btn-dark btn-flat"><div class="fa fa-user-cog"></div> Manage Account</a>
                         </div>
                             <hr class="border-warning">
-                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="DataTables_Table_0_filter" class="dataTables_filter"></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-stripped text-dark dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="DataTables_Table_0_length">
+                                 </div></div>
+                                    <div class="col-sm-12 col-md-6">
+                                    <div id="DataTables_Table_0_filter" class="dataTables_filter"></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-stripped text-dark dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                 <colgroup>
                                     <col width="10%">
                                     <col width="15">
@@ -77,8 +92,8 @@
                                                                     
                                                                     
                                     <tr class="odd">
-                                        <?php $i = 0; foreach($orders as $order){ $i++;  ?>
-                                            <td class="sorting_1"><?php echo $i?></td>
+                                        <?php foreach($orders as $order){ ?>
+                                            <td class="sorting_1"><?php echo  $order['order_id']?></td>
                                             <td><?php echo $order['date'].' '.$order['time']?></td>
                                             <td><a href="javascript:void(0)" class="view_order" data-id="8"><?php echo $order['transaction_id'] ?></a></td>
                                             <td><?php echo $order['total'] * $_SESSION['rate'] .' '. $_SESSION['currency']?> </td>
@@ -88,12 +103,33 @@
                                             </tr><tr class="even">
                                                 <?php } ?>
                                             </tbody>
-                                            </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 2 of 2 entries</div></div>
-                                            <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                                <ul class="pagination"><li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                                                </li><li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                                            </table>
+                                        <div class="row d-flex justify-content-center">
+                                         <div  >
+                                            <?php if($total_orders > 0){?>
+
+                                                <div aria-label="Page navigation example bg-light ">
+                                                    <ul class="pagination bg-light d-flex justify-content-center">
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="orders.php?page=<?php echo $page > 1? $page-1 : $page?>">Previous</a>
+                                                        </li>
+                                                        <?php for($i =0; $i < $total_pages; $i++){ ?>
+                                                        <li class="page-item <?php echo $page==$i +1 ? "active":""; ?>"><a class="page-link" 
+                                                            href="orders.php?page=<?php echo $i+1; ?>">
+                                                            <?php echo $i+1; ?>
+                                                        </a></li>
+                                                        
+                                                        <?php } ?>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="orders.php?page=<?php echo $page < $total_pages? $page+1 : $page?>">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            <?php }?>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

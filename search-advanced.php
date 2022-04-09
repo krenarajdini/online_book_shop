@@ -99,12 +99,8 @@ body {
                     </div>
                     
                     <div class="form-group">
-                    <label for="password1" class="col-sm-3 control-label">Price Range:</label>
-                <div class="col-sm-3">
-                    <input type="text" name="price-max" class="form-control" id="max-price" placeholder="Max"> <br /><br /> 
-                    <input type="text" name="price-min" class="form-control" id="min-price" placeholder="Min">
-                </div>
-                    <br /><br /><br /><br />                        
+                       
+                    <br />                        
                     <button type="submit" class="btn btn-primary btn-block">Search :: <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 
             </div>
