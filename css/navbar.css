@@ -19,13 +19,6 @@ button a {
 button a:hover {
   text-decoration: none;
 }
-
-.username {
-  width: fit-content;
-  font-size: 15px !important;
-  margin: 0px 0px 0px 0px;
-}
-
 ul {
   list-style-type: none;
 }
@@ -116,7 +109,4 @@ input[type="text"]:focus {
 }
 .form-inline {
   width: auto;
-}
-.username {
-  margin-left: 300px;
 }
