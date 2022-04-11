@@ -32,7 +32,6 @@
         $_SESSION['rate'] = 1;
     }
 
-echo basename($_SERVER['REQUEST_URI']);
 ob_start();?>
 
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">

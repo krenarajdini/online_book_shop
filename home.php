@@ -36,6 +36,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/filter.css">
@@ -50,6 +51,10 @@ include_once "navbar.php";
 ?>
 
 <?php  
+   
+
+    
+
     $books = [];
     $products_page = 6;
     $page = 1;
@@ -223,6 +228,41 @@ include_once "navbar.php";
             }
         } 
     }
+
+    
+    $i = 0;
+    for($i = 0; $i < count($books); $i++){
+        //Get reviews
+        $book_name = $books[$i]->book_number;
+        $review_sql = "SELECT * FROM reviews WHERE book_number = '$book_name'";
+        $review_result = mysqli_query($con, $review_sql);
+        $reviews = array();
+        $stars_count = [0,0,0,0,0];
+        while($row = mysqli_fetch_assoc($review_result)){
+            $reviews[] = $row;
+            $stars_count[$row['rating']-1]++;
+        }
+        $totalReviews = count($reviews);
+        if($totalReviews == 0){
+            $totalReviews = 1;
+        }else{
+            $totalReviews = count($reviews);
+        }
+
+        //Calculate stars rating
+        $totalRating = 0;
+        foreach($reviews as $review){
+            $totalRating += $review['rating'];
+        }
+        if($totalReviews > 0){
+            $averageRating = $totalRating/$totalReviews;
+        }else{
+            $averageRating = 0;
+        }
+        $averageRating = round($averageRating, 1);
+        $averageRating = number_format($averageRating, 1);
+        $books[$i] = (object) array_merge( (array)$books[$i], array( 'rating' => $averageRating ) );
+    }
 ?>
         <!-- Deafult home page -->
                 <header class="py-1" >
@@ -297,6 +337,7 @@ include_once "navbar.php";
                         
                         
                         for($i= 0; $i < count($books); $i++){ ?>
+                        
                         <div class="col-4 my-2">
                             <div class="card product-item">
                                 <!-- Product image-->
@@ -305,7 +346,22 @@ include_once "navbar.php";
                                 <div class="card-body">
                                     <div class="">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder"> <?php echo $books[$i]->title ?> </h5>
+                                        <h5 class="fw-bolder"> <?php echo $books[$i]->title ?> 
+                                           
+                                        <span> <?php  $averageRating = $books[$i]->rating; ?>
+
+                                            <div class="d-flex"> 
+                                            <?php for($i = 0; $i < floor($averageRating); $i++){  ?>
+                                                <span class="fa fa-star star-active ml-3"></span>
+                                                <?php }for($i = 0; $i < 5-floor($averageRating); $i++){ ?>
+                                                    <span class="fa fa-star star-inactive ml-3"></span>
+                                                <?php }?>
+                                            </div>
+                                        
+                                        
+                                        </span>
+                                    
+                                        </h5>
                                         <!-- Product price-->
                                         <span><b>Price: </b><strong><?php echo $books[$i]->price * $_SESSION['rate'] ."</strong> ". $_SESSION['currency'] ?> </span>
                                     </div>
