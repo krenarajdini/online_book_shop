@@ -38,7 +38,7 @@ ob_start();?>
 <nav class="navbar fixed-top container-fluid px-3 px-lg-3 ">
         
 
-       <form class="form-inline" method="POST" action="home.php" autocomplete="off">
+       <form class="form-inline m-0" method="POST" action="home.php" autocomplete="off">
              <a class="navbar-brand" href="home.php">
                 <img src="img\PngItem_194580.png" width="30" height="30" alt="" loading="lazy" >Book Shop</a>
                 
@@ -54,18 +54,18 @@ ob_start();?>
                 
         </form>    
                 
-                <div class="input-group  username" >
+                <div class="d-flex align-items-center username" >
 
-                    <form action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
+                    <form class="m-0" action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
                         <button class="btn <?php echo $_SESSION['currency']=="USD"? "active":"";?> btn-outline-light mx-1" type="submit"><i class="fa fa-dollar"></i></button>
                         <input type="hidden" name="currency" value="USD">
                         <input type="hidden" name="rate" value="1">
                     </form>
 
-                    <form action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
+                    <form class="m-0" action="<?php echo basename($_SERVER['REQUEST_URI']);?>" method="POST">
                         <button class="btn <?php echo $_SESSION['currency']=="SAR"? "active":"";?> btn-outline-light mx-1" type="submit"><i class="fa fa-bitcoin"></i></button>
                         <input type="hidden" name="currency" value="SAR">
-                        <input type="hidden" name="rate" value="4">
+                        <input type="hidden" name="rate" value="3.75">
 
                     </form>
                     <button type="button" class="btn btn-light">

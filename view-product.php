@@ -45,6 +45,7 @@
         $reviews[] = $row;
         $stars_count[$row['rating']-1]++;
     }
+    $totalReviews = count($reviews);
     if($totalReviews == 0){
         $totalReviews = 1;
     }else{
@@ -53,9 +54,6 @@
 
     //Calculate stars rating
     $totalRating = 0;
-    $totalReviews = count($reviews);
-    $totalReviews = $totalReviews + 1;
-    echo $totalReviews;
     foreach($reviews as $review){
         $totalRating += $review['rating'];
     }

@@ -53,7 +53,7 @@
         $total_orders = mysqli_num_rows($result);
         $total_pages = ceil($total_orders / $orders_page);
 
-        $sql = "SELECT * FROM orders WHERE u_id = '$_SESSION[user_id]' ORDER BY order_id ASC LIMIT $start, $orders_page";
+        $sql = "SELECT * FROM orders WHERE u_id = '$_SESSION[user_id]' ORDER BY order_id DESC LIMIT $start, $orders_page";
         $result = mysqli_query($con, $sql);
         $orders = array();
         while($row = mysqli_fetch_assoc($result)){
