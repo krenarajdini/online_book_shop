@@ -1,3 +1,4 @@
+let submitElement = document.getElementById("submit");
 //Username validation
 const usernameElement = document.getElementById("username");
 const usernameErrorElement = document.getElementById("username-error");
@@ -107,6 +108,8 @@ emailElement.onkeyup = function () {
 };
 
 //Password validation
+
+//6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter]
 const passElement = document.getElementById("pswd");
 const confirmPassElement = document.getElementById("confirm-pswd");
 const passErrorMessageElement = document.getElementById("pass-error-message");
@@ -117,18 +120,30 @@ passElement.onkeyup = function () {
   pass = passElement.value;
   confirmPass = confirmPassElement.value;
 
+  console.log(pass, confirmPass);
+  console.log(pass == confirmPass);
+  console.log(new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(pass));
+
   if (
     pass == confirmPass &&
-    !pass.match("/^(?=.*d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/")
+    new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(pass)
   ) {
+    console.log(1.1);
     passElement.classList.remove("error-element");
     confirmPassElement.classList.remove("error-element");
     passErrorMessageElement.innerText = "";
     passErrorMessageElement.classList.remove("error-message");
-  } else {
+  } else if (
+    pass != confirmPass ||
+    !new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(pass)
+  ) {
+    console.log(1.2);
+
     passElement.classList.add("error-element");
     confirmPassElement.classList.add("error-element");
-    passErrorMessageElement.innerText = "Passwords must match";
+    passErrorMessageElement.innerHTML =
+      "<p>Password must have:</p> <p>6 to 20 characters</p> <p>contain at least one numeric digit</p>" +
+      "<p>one uppercase and one lowercase letter</p>";
     passErrorMessageElement.classList.add("error-message");
   }
 };
@@ -136,19 +151,35 @@ passElement.onkeyup = function () {
 confirmPassElement.onkeyup = function () {
   pass = passElement.value;
   confirmPass = confirmPassElement.value;
-
+  console.log(pass, confirmPass);
+  console.log(pass == confirmPass);
+  console.log(
+    new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(confirmPass)
+  );
+  console.log(
+    pass == confirmPass &&
+      new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(confirmPass)
+  );
   if (
     pass == confirmPass &&
-    !confirmPass.match("/^(?=.*d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/")
+    new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(confirmPass)
   ) {
+    console.log(2.1);
     confirmPassElement.classList.remove("error-element");
     passElement.classList.remove("error-element");
     passErrorMessageElement.innerText = "";
     passErrorMessageElement.classList.remove("error-message");
-  } else {
+  } else if (
+    pass != confirmPass ||
+    !new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/).test(confirmPass)
+  ) {
+    console.log(2.2);
     confirmPassElement.classList.add("error-element");
     passElement.classList.add("error-element");
-    passErrorMessageElement.innerText = "Passwords must match";
+    passErrorMessageElement.innerHTML =
+      "<p>Password must have:</p> <p>6 to 20 characters</p> <p>contain at least one numeric digit</p>" +
+      "<p>one uppercase and one lowercase letter</p>";
+
     passErrorMessageElement.classList.add("error-message");
   }
 };

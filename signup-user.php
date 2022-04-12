@@ -104,7 +104,7 @@
                         <input class="form-control" id="confirm-pswd" type="password" name="cpassword" placeholder="Confirm password" required>
                         </div>
                         </div></div>
-                        <p id="pass-error-message"></p> 
+                        <p class="pass-error-message" id="pass-error-message"></p> 
                         
                     <div class="form-group">
                         <button class="form-control button"  type="submit" name="signup" value="Signup">Signup</button>

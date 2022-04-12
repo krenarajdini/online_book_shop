@@ -52,8 +52,7 @@ include_once "navbar.php";
 
 <?php  
    
-
-    
+     
 
     $books = [];
     $products_page = 6;
